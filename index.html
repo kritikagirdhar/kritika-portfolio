@@ -1,0 +1,1392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kritika Girdhar Portfolio</title>
+<meta name="description" content="Kritika Girdhar, aspiring Associate Product Manager. Case studies: FICO DMPS, Rapido, Swiggy Instamart.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: soft sage-washed portfolio. Centred intro, big rounded project cards (copy + tags + metric tiles + pill CTA
+   on the left, a real visual on the right). Each case is its own view with a sticky step menu:
+   Context → Discover → Define → Design → Measure → Risks. */
+:root{
+  --bg:#F5F6F3; --wash:#DCE4D6; --surface:#FFFFFF; --ink:#1F2421; --muted:#5F6661; --faint:#8E958F; --line:#E4E7E2;
+  --btn:#1F2421; --btn-ink:#FFFFFF; --up:#2E8B57; --neg:#C2553F;
+  --t-fico:#E6ECF8; --t-fico2:#F4F6FB; --dot-fico:#4C6FD1;
+  --t-rapido:#E5F1E8; --t-rapido2:#F3F8F4; --dot-rapido:#3C9B63;
+  --t-insta:#F8E8E1; --t-insta2:#FCF4F0; --dot-insta:#D9693F;
+  --font:"Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121513; --wash:#1E2A21; --surface:#1A1E1B; --ink:#ECEFEB; --muted:#A5ADA7; --faint:#737B75; --line:#2B312D;
+    --btn:#ECEFEB; --btn-ink:#121513; --up:#6CCB93; --neg:#E8866F;
+    --t-fico:#1A2235; --t-fico2:#161B26; --dot-fico:#8EA8F0;
+    --t-rapido:#18271E; --t-rapido2:#151D18; --dot-rapido:#73C995;
+    --t-insta:#2C1D17; --t-insta2:#1F1714; --dot-insta:#F0956E;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121513; --wash:#1E2A21; --surface:#1A1E1B; --ink:#ECEFEB; --muted:#A5ADA7; --faint:#737B75; --line:#2B312D;
+  --btn:#ECEFEB; --btn-ink:#121513; --up:#6CCB93; --neg:#E8866F;
+  --t-fico:#1A2235; --t-fico2:#161B26; --dot-fico:#8EA8F0;
+  --t-rapido:#18271E; --t-rapido2:#151D18; --dot-rapido:#73C995;
+  --t-insta:#2C1D17; --t-insta2:#1F1714; --dot-insta:#F0956E;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(60% 50% at 50% 30%, var(--wash) 0%, transparent 70%)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
+h1,h2,h3,h4{margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+img{max-width:100%;display:block}
+.tnum{font-variant-numeric:tabular-nums}
+.gutter{padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+.inner{max-width:1080px;margin:0 auto}
+
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:color-mix(in srgb, var(--bg) 78%, transparent)}
+.top .inner{display:flex;justify-content:space-between;align-items:center;padding-block:16px;gap:16px}
+.brand{font-weight:600;font-size:.95rem}
+.nav{display:flex;gap:28px}
+.nav a{font-size:.9rem;font-weight:500;color:var(--muted)}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--ink)}
+
+main{padding-block:24px 40px}
+.view{display:grid;gap:72px}
+
+.hero{text-align:center;display:grid;justify-items:center;gap:14px;padding-block:56px 16px}
+.mono-avatar{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:4px solid var(--surface);box-shadow:0 8px 30px -12px rgba(0,0,0,.25);font-weight:600;font-size:2rem;object-fit:cover;width:120px;height:120px}
+.hi{font-size:1.3rem}
+.hi b{font-weight:600}
+.hero h1{font-size:clamp(2.4rem,6vw,3.6rem);font-weight:600;line-height:1.1}
+.hero .lede{color:var(--muted);max-width:48ch;font-size:1rem}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+.pill-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;background:var(--btn);color:var(--btn-ink);font-weight:500;font-size:.9rem;border:0;cursor:pointer;font-family:var(--font);transition:transform .2s}
+.pill-btn:hover{transform:translateY(-1px)}
+.ghost-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:500;font-size:.9rem;color:var(--ink);cursor:pointer;font-family:var(--font)}
+.ghost-btn:hover{border-color:var(--ink)}
+
+.sechead{text-align:center;display:grid;gap:6px;justify-items:center}
+.sechead h2{font-size:clamp(1.6rem,3.5vw,2.1rem);font-weight:500}
+.sechead p{color:var(--muted);max-width:48ch}
+
+.projects{display:grid;gap:28px}
+.project{--t:var(--t-fico);--t2:var(--t-fico2);--dot:var(--dot-fico);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center;border-radius:28px;padding:44px clamp(24px,4vw,52px);background:linear-gradient(135deg,var(--t),var(--t2));border:1px solid var(--line)}
+.project[data-c="rapido"]{--t:var(--t-rapido);--t2:var(--t-rapido2);--dot:var(--dot-rapido)}
+.project[data-c="insta"]{--t:var(--t-insta);--t2:var(--t-insta2);--dot:var(--dot-insta)}
+.project .copy{display:grid;gap:16px;min-width:0}
+.co{display:flex;gap:10px;align-items:center;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.co .logo{width:28px;height:28px;border-radius:7px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-size:.7rem;letter-spacing:0;font-weight:600}
+.project h3{font-size:clamp(1.6rem,3vw,2.1rem);font-weight:600;line-height:1.15}
+.project .desc{color:var(--muted);max-width:44ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;padding:5px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.tags span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--dot)}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.tile{background:var(--surface);border-radius:14px;padding:14px 12px;text-align:center;display:grid;gap:2px;border:1px solid var(--line)}
+.tile b{font-size:1.3rem;font-weight:600;line-height:1.2}
+.tile .up{color:var(--up);font-size:.8rem;margin-left:2px;vertical-align:super}
+.tile span{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.35}
+
+.visual{background:var(--surface);border-radius:22px;padding:22px;border:1px solid var(--line);box-shadow:0 24px 50px -30px rgba(0,0,0,.35);display:grid;gap:14px;min-width:0}
+.visual .vt{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.visual.photo{padding:0;overflow:hidden}
+.visual.photo img{width:100%;height:auto}
+.phones-mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:end;padding:22px 22px 0;background:var(--surface)}
+.phones-mini img{border-radius:14px 14px 0 0;border:1px solid var(--line);border-bottom:0}
+.phones-mini img:nth-child(2){transform:translateY(-14px)}
+.phones-mini img{width:100%;height:auto;aspect-ratio:9/15;object-fit:cover;object-position:top}
+.visual.photo .phones-mini{max-height:340px;overflow:hidden}
+.cost{display:grid;gap:12px}
+.cost-row{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:12px;align-items:center;font-size:.85rem}
+.bar{height:12px;border-radius:999px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:999px;background:var(--dot)}
+.bar i.gone{background:var(--neg);opacity:.7}
+.checks{display:grid;gap:8px;font-size:.85rem;padding-top:12px;border-top:1px solid var(--line)}
+.checks div{display:flex;gap:10px;align-items:center}
+.checks div::before{content:"✓";width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--t);color:var(--dot);font-size:.7rem;font-weight:600;flex:none}
+
+.about{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:24px;display:grid;gap:12px;align-content:start;min-width:0}
+.card h3{font-size:1.05rem;font-weight:600}
+.about .card p{color:var(--muted)}
+.skills{display:grid;gap:12px}
+.skills div{display:grid;gap:6px}
+.k{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:.8rem;padding:4px 12px;border-radius:999px;background:var(--bg);border:1px solid var(--line)}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.tl li{display:grid;grid-template-columns:14px minmax(0,1fr);gap:14px}
+.tl li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--ink);margin-top:8px}
+.tl .when{font-size:.75rem;color:var(--faint);letter-spacing:.06em;text-transform:uppercase}
+.tl h4{font-size:.98rem;font-weight:600}
+.tl p{font-size:.88rem;color:var(--muted)}
+
+.contact{text-align:center;display:grid;justify-items:center;gap:14px;padding-block:56px 24px}
+.contact h2{font-size:clamp(1.6rem,3.5vw,2.1rem);font-weight:500}
+.contact p{color:var(--muted)}
+.contact .row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.email{user-select:all;font-weight:500}
+.toast{font-size:.82rem;color:var(--up);min-height:1.2em}
+.copyright{text-align:center;font-size:.78rem;color:var(--faint);padding-block:16px 8px}
+.note{font-size:.78rem;color:var(--faint);max-width:62ch;text-align:center}
+
+/* Case pages */
+.case{--t:var(--t-fico);--t2:var(--t-fico2);--dot:var(--dot-fico)}
+.case[data-c="rapido"]{--t:var(--t-rapido);--t2:var(--t-rapido2);--dot:var(--dot-rapido)}
+.case[data-c="insta"]{--t:var(--t-insta);--t2:var(--t-insta2);--dot:var(--dot-insta)}
+.case.view{gap:48px}
+.back{justify-self:start;font-size:.88rem;color:var(--muted);font-weight:500}
+.back:hover{color:var(--ink)}
+.chero{border-radius:28px;padding:44px clamp(24px,5vw,56px);background:linear-gradient(135deg,var(--t),var(--t2));border:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:center}
+.chero .txt{display:grid;gap:16px;min-width:0}
+.chero h1{font-size:clamp(1.9rem,4.6vw,2.8rem);font-weight:600;line-height:1.12}
+.chero .thesis{color:var(--muted);font-size:1.02rem;max-width:56ch}
+.chero .art{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.chero .art.pad{padding:20px}
+.chero .logo-art{background:#FFFFFF;display:grid;place-items:center;aspect-ratio:4/3;padding:24px}
+.chero .logo-art img{width:min(180px,60%);height:auto}
+.summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.summary .lab{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dot);font-weight:600}
+.summary .big{font-size:1.6rem;font-weight:600}
+
+.layout{display:grid;grid-template-columns:180px minmax(0,1fr);gap:48px;align-items:start}
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);display:grid;gap:4px}
+.toc button{all:unset;cursor:pointer;font-size:.88rem;color:var(--muted);padding:8px 14px;border-radius:999px;font-weight:500}
+.toc button:hover{color:var(--ink);background:var(--surface)}
+.toc button.on{background:var(--btn);color:var(--btn-ink)}
+.toc button:focus-visible{outline:2px solid var(--ink)}
+
+.steps{display:grid;gap:64px;min-width:0}
+.step{display:grid;gap:20px;scroll-margin-top:96px}
+.step > header{display:grid;gap:2px}
+.step > header .n{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dot);font-weight:600}
+.step > header h2{font-size:1.65rem;font-weight:600}
+.step p{max-width:66ch}
+.sub{display:grid;gap:12px}
+.sub > h3{font-size:1.05rem;font-weight:600}
+.problem{font-size:clamp(1.2rem,2.5vw,1.5rem);font-weight:500;line-height:1.4;max-width:38ch;padding-left:18px;border-left:3px solid var(--dot)}
+.insight{background:linear-gradient(135deg,var(--t),var(--t2));border-radius:18px;padding:20px 22px;display:grid;gap:6px;max-width:72ch}
+.insight .lab{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dot);font-weight:600}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card .q{color:var(--muted);font-style:italic}
+.facts{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.88rem}
+.facts dt{color:var(--faint)}
+.facts dd{margin:0}
+ul.list,ol.list{margin:0;padding-left:1.15em;display:grid;gap:6px;max-width:68ch}
+ul.list li::marker,ol.list li::marker{color:var(--dot);font-weight:600}
+.card ul.list{font-size:.9rem}
+.stepno{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--t);color:var(--dot);font-weight:600;font-size:.82rem}
+
+.seg{display:grid;gap:10px}
+.seg div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;align-items:center;font-size:.88rem}
+.seg .opts{display:flex;flex-wrap:wrap;gap:6px}
+.seg .opts span{padding:5px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);color:var(--faint)}
+.seg .opts span.hit{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+
+.chartcard{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:16px;overflow-x:auto}
+.chartcard svg{display:block;min-width:620px;width:100%;height:auto}
+.chartcard .axis{stroke:var(--line)}
+.chartcard .curve{fill:none;stroke:var(--dot);stroke-width:2.5}
+.chartcard .dot{fill:var(--surface);stroke:var(--dot);stroke-width:2.5}
+.chartcard .dot.low{fill:var(--neg);stroke:var(--neg)}
+.chartcard text{fill:var(--ink);font-family:var(--font);font-size:12px}
+.chartcard .s{fill:var(--muted);font-size:11px}
+.chartcard .lab{fill:var(--faint);font-size:10px;letter-spacing:.1em}
+.chartcard .zone{fill:var(--neg);opacity:.06}
+
+.tablecard{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.88rem}
+th,td{text-align:left;padding:12px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+th[scope="row"]{font-size:.82rem;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:600;white-space:nowrap}
+td.c,th.c{text-align:center;width:110px}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td,tr:last-child th{border-bottom:0}
+tr.total td{font-weight:600;background:var(--bg)}
+tr.hot td{background:color-mix(in srgb, var(--neg) 6%, transparent)}
+.yes{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--t);color:var(--dot);font-size:.75rem;font-weight:600}
+.emo{font-size:.78rem;font-weight:600}
+.emo.good{color:var(--up)} .emo.bad{color:var(--neg)} .emo.mid{color:var(--muted)}
+
+.phase{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.phase .card{padding:16px;gap:6px}
+.phase .card.hot{border-color:var(--neg);box-shadow:inset 0 3px 0 var(--neg)}
+.phase h4{font-size:.88rem;font-weight:600}
+.phase p{font-size:.8rem;color:var(--muted)}
+.flag{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.flag.hot{color:var(--neg)} .flag.cold{color:var(--faint)}
+
+.why{display:grid;gap:14px}
+.why .card h3{font-size:.98rem}
+.mapping{display:grid;gap:8px}
+.maprow{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);gap:10px;align-items:center}
+.maprow > div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;font-size:.88rem}
+.maprow > div:last-child{background:linear-gradient(135deg,var(--t),var(--t2));font-weight:500}
+.maprow .arr{text-align:center;color:var(--dot);font-weight:600}
+.maphead{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);gap:10px}
+
+.formula{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;line-height:1.5;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+
+.flow{display:flex;align-items:flex-start;gap:6px;overflow-x:auto;padding-bottom:6px}
+.flow figure{margin:0;display:grid;gap:10px;flex:1 1 0;min-width:140px;max-width:210px}
+.flow.full img{aspect-ratio:420/910;object-fit:contain}
+.flow.full figure{min-width:120px}
+.flow > :first-child{margin-left:auto}
+.flow > :last-child{margin-right:auto}
+.flow .arrow{flex:0 0 auto;align-self:center;margin-top:-56px;color:var(--dot);font-size:1.6rem;font-weight:600;line-height:1}
+.flow img{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;object-position:top;border-radius:14px;border:6px solid var(--surface);outline:1px solid var(--line);background:var(--surface);box-shadow:0 18px 40px -28px rgba(0,0,0,.4)}
+.flow figcaption{font-size:.82rem;color:var(--muted);display:grid;gap:2px}
+.flow figcaption b{color:var(--ink);font-weight:600;font-size:.86rem}
+
+.stream{display:grid;gap:6px}
+.stream h4{font-size:.92rem;font-weight:600}
+.stream ul{margin:0;padding-left:1.1em;font-size:.84rem;color:var(--muted);display:grid;gap:2px}
+
+.risks{display:grid;gap:10px}
+.risk{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;font-size:.9rem}
+.risk span{display:block;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:500;margin-bottom:2px}
+
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pager a{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 20px;display:grid;gap:2px}
+.pager a:hover{border-color:var(--ink)}
+.pager span{font-size:.75rem;color:var(--faint)}
+.pager b{font-weight:600}
+.pager a.r{text-align:right}
+.small{font-size:.78rem;color:var(--faint)}
+
+@media (max-width:960px){
+  .phase{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  .project,.chero{grid-template-columns:1fr;gap:28px}
+  .about,.layout{grid-template-columns:1fr}
+  .layout{gap:20px}
+  .toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 60px);z-index:5;display:flex;overflow-x:auto;gap:6px;padding-block:8px;background:var(--bg)}
+  .toc button{white-space:nowrap;background:var(--surface)}
+  .g3{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .hero{padding-block:32px 8px}
+  .project{padding:28px 20px;border-radius:22px}
+  .chero{padding:28px 20px}
+  .tiles{gap:6px}
+  .tile{padding:12px 6px}
+  .tile b{font-size:1.05rem}
+  .summary,.g2,.pager,.g4{grid-template-columns:1fr}
+  .phase{grid-template-columns:1fr}
+  .seg div{grid-template-columns:1fr;gap:6px}
+  .risk{grid-template-columns:1fr;gap:8px}
+  .maprow,.maphead{grid-template-columns:1fr}
+  .maprow .arr{transform:rotate(90deg)}
+  .maphead{display:none}
+  .cost-row{grid-template-columns:80px minmax(0,1fr) auto}
+  .nav{gap:18px}
+  .pager a.r{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* New case themes */
+:root{--t-marble:#ECE7FA;--t-marble2:#F6F3FC;--dot-marble:#7B52D6;--t-upi:#DFF1EE;--t-upi2:#F1F8F6;--dot-upi:#1E8576}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--t-marble:#221B36;--t-marble2:#1A1726;--dot-marble:#B49BF2;--t-upi:#14282A;--t-upi2:#131D1E;--dot-upi:#6CCDBE}}
+:root[data-theme="dark"]{--t-marble:#221B36;--t-marble2:#1A1726;--dot-marble:#B49BF2;--t-upi:#14282A;--t-upi2:#131D1E;--dot-upi:#6CCDBE}
+.project[data-c="marble"],.case[data-c="marble"]{--t:var(--t-marble);--t2:var(--t-marble2);--dot:var(--dot-marble)}
+.project[data-c="upi"],.case[data-c="upi"]{--t:var(--t-upi);--t2:var(--t-upi2);--dot:var(--dot-upi)}
+
+/* Phone mock-ups (original concept screens) */
+.mocks{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.mockwrap{margin:0;display:grid;gap:10px;justify-items:center;width:220px;max-width:100%}
+.mockwrap figcaption{font-size:.8rem;color:var(--muted);text-align:center}
+.mockwrap figcaption b{display:block;color:var(--ink);font-weight:600}
+.phone{width:220px;max-width:100%;aspect-ratio:9/18;border-radius:30px;background:#111;padding:8px;box-shadow:0 24px 50px -28px rgba(0,0,0,.5)}
+.screen{position:relative;width:100%;height:100%;border-radius:23px;overflow:hidden;display:flex;flex-direction:column;font-size:10px;line-height:1.35;color:#1d1d1f}
+.screen.game{background:linear-gradient(180deg,#1C4FD8 0%,#2F86F0 55%,#55B8F7 100%);color:#fff}
+.screen.pay{background:#F7F8FA}
+.sbar{display:flex;justify-content:space-between;padding:8px 14px 4px;font-size:9px;font-weight:600}
+.lvl{display:flex;justify-content:space-between;align-items:center;padding:4px 12px;font-weight:600}
+.lvl .coins{background:rgba(255,255,255,.22);padding:2px 8px;border-radius:999px}
+.belt{position:relative;margin:14px auto 0;width:170px;height:62px;border-radius:31px;background:#3A3F4A;border:6px solid #2A2E36}
+.belt .m{position:absolute;width:14px;height:14px;border-radius:50%;box-shadow:inset -2px -2px 0 rgba(0,0,0,.18)}
+.trays{display:flex;justify-content:center;gap:6px;margin-top:10px}
+.tray{width:38px;height:16px;border-radius:5px;background:rgba(255,255,255,.3);display:flex;gap:2px;align-items:center;justify-content:center}
+.tray i{width:9px;height:9px;border-radius:50%}
+.sheet{position:absolute;left:8px;right:8px;bottom:8px;background:#fff;color:#1d1d1f;border-radius:18px;padding:12px;display:grid;gap:7px;box-shadow:0 -8px 24px rgba(0,0,0,.25)}
+.sheet h5{margin:0;font-size:12px;font-weight:700}
+.sheet p{margin:0;color:#555;font-size:9.5px}
+.mbtn{display:flex;justify-content:space-between;align-items:center;border-radius:10px;padding:7px 10px;font-weight:600;font-size:10px}
+.mbtn.ad{background:#E6F0FE;color:#1C4FD8}
+.mbtn.buy{background:#F5B700;color:#3A2A00}
+.mbtn.ghost{background:transparent;color:#777;justify-content:center;font-weight:500}
+.mbtn.danger{background:#FCE9E6;color:#A8392A}
+.mbtn.ok{background:#1E8576;color:#fff}
+.tagpill{display:inline-block;background:#FFE8A3;color:#6B4E00;border-radius:999px;padding:1px 7px;font-size:8.5px;font-weight:700}
+.perks{display:grid;gap:4px;font-size:9.5px}
+.perks span::before{content:"✓ ";color:#2E8B57;font-weight:700}
+.payhead{background:#1E8576;color:#fff;padding:8px 14px 14px;display:grid;gap:4px}
+.payhead .amt{font-size:22px;font-weight:700}
+.payee{display:flex;gap:8px;align-items:center}
+.payee .av{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.25);display:grid;place-items:center;font-weight:700}
+.warn{margin:10px;background:#fff;border-radius:14px;padding:10px;display:grid;gap:7px;border:1px solid #F1D2CC}
+.warn h5{margin:0;font-size:11.5px;color:#A8392A}
+.chipset{display:flex;flex-wrap:wrap;gap:4px}
+.chipset span{border:1px solid #D7DCE0;border-radius:999px;padding:3px 7px;font-size:9px;background:#fff}
+.chipset span.sel{background:#1E8576;color:#fff;border-color:#1E8576}
+.alertbox{background:#FFF4E5;border-radius:10px;padding:8px;font-size:9.5px;color:#7A4A00}
+.flags{display:grid;gap:3px;font-size:9px;color:#555}
+.flags span::before{content:"⚑ ";color:#A8392A}
+
+/* Core loop diagram */
+.loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
+.loop .node{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:.82rem;font-weight:500;text-align:center;max-width:130px}
+.loop .node.hot{border-color:var(--dot);box-shadow:inset 0 3px 0 var(--dot)}
+.loop .ar{color:var(--dot);font-weight:600}
+
+.rice td.num b{color:var(--dot)}
+.rice table{min-width:660px}
+.rice td:first-child{min-width:240px}
+tr.pick td{background:color-mix(in srgb, var(--dot) 8%, transparent)}
+.sources{display:grid;gap:4px;font-size:.82rem}
+.sources a{color:var(--dot);text-decoration:underline;text-underline-offset:2px}
+.callnote{font-size:.8rem;color:var(--faint);border:1px dashed var(--line);border-radius:12px;padding:10px 14px}
+
+.stat{display:block;font-size:1.45rem;font-weight:600;line-height:1.2}
+</style>
+<style>body{margin:0}</style>
+</head>
+<body>
+
+<header class="top gutter">
+  <div class="inner">
+    <a class="brand" href="#work">Kritika Girdhar</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#work" data-nav="work">Work</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="gutter">
+<div class="inner">
+
+<!-- ========== HOME ========== -->
+<section class="view" data-view="home">
+  <div class="hero">
+    <img class="mono-avatar" src="assets/kritika.jpg" alt="Kritika Girdhar" width="400" height="400">
+    <p class="hi">Hi, I'm <b>Kritika</b> 👋</p>
+    <h1>Product Manager</h1>
+    <p class="lede">With 6 years of engineering at FICO, I build products from the inside out: understanding users, prioritising what matters, and measuring what ships.</p>
+    <div class="ctas">
+      <a class="pill-btn" href="#selected" id="seeWork">See my work ↓</a>
+      <a class="ghost-btn" href="https://www.linkedin.com/in/kritika-girdhar-98079a16b" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </div>
+
+  <div class="sechead" id="selected">
+    <h2>Selected Work</h2>
+    <p>Case studies where user insight meets technical depth, each tied to a clear business metric.</p>
+  </div>
+
+  <div class="projects">
+    <article class="project" data-c="fico">
+      <div class="copy">
+        <div class="co"><span class="logo">F</span>FICO · Shipped at work</div>
+        <h3>DMPS Platform</h3>
+        <p class="desc">Product decisions from the engineering seat on an enterprise decision and analytics platform for banks and lenders.</p>
+        <div class="tags"><span>B2B FinTech</span><span>Cost optimisation</span><span>Feature ownership</span></div>
+        <div class="tiles">
+          <div class="tile"><b class="tnum">$1.4k<span class="up">↓</span></b><span>Yearly licence cost</span></div>
+          <div class="tile"><b class="tnum">10%<span class="up">↑</span></b><span>Feature adoption</span></div>
+          <div class="tile"><b class="tnum">12</b><span>Releases shipped</span></div>
+        </div>
+        <div><a class="pill-btn" href="#fico">View Case Study ↗</a></div>
+      </div>
+      <div class="visual" aria-label="Licence cost before and after the OpenSearch migration">
+        <span class="vt">Search licence cost / year</span>
+        <div class="cost">
+          <div class="cost-row"><span>Elasticsearch</span><div class="bar"><i class="gone" style="width:100%"></i></div><b class="tnum">~$1,368</b></div>
+          <div class="cost-row"><span>OpenSearch</span><div class="bar"><i style="width:2%"></i></div><b class="tnum">$0</b></div>
+        </div>
+        <div class="checks">
+          <div>Proposed the open-source migration</div>
+          <div>Assessed compatibility and made the changes</div>
+          <div>Validated the stack before release</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" data-c="rapido">
+      <div class="copy">
+        <div class="co"><span class="logo">R</span>Rapido · Concept study</div>
+        <h3>Minimising App Switching</h3>
+        <p class="desc">Why riders leave Rapido while waiting for a captain, and two features that turn the wait into a reason to stay.</p>
+        <div class="tags"><span>Ride-hailing</span><span>Journey mapping</span><span>Root-cause analysis</span></div>
+        <div class="tiles">
+          <div class="tile"><b>2</b><span>Personas</span></div>
+          <div class="tile"><b>5</b><span>Pain points mapped</span></div>
+          <div class="tile"><b>2</b><span>Features designed</span></div>
+        </div>
+        <div><a class="pill-btn" href="#rapido">View Case Study ↗</a></div>
+      </div>
+      <div class="visual photo"><img src="assets/rapido-cover.jpg" alt="Illustration of a ride being booked on a phone, with a taxi and auto-rickshaw" loading="lazy" width="960" height="720"></div>
+    </article>
+
+    <article class="project" data-c="insta">
+      <div class="copy">
+        <div class="co"><span class="logo">S</span>Swiggy Instamart · Product teardown</div>
+        <h3>InstaRestocker</h3>
+        <p class="desc">A teardown of Instamart and an AI restock assistant that predicts what a household is about to run out of, turning small urgent orders into one basket.</p>
+        <div class="tags"><span>Quick commerce</span><span>Unit economics</span><span>AI feature</span></div>
+        <div class="tiles">
+          <div class="tile"><b class="tnum">10%<span class="up">↑</span></b><span>AOV (modelled)</span></div>
+          <div class="tile"><b class="tnum">₹440</b><span>Projected AOV</span></div>
+          <div class="tile"><b>6</b><span>Revenue streams mapped</span></div>
+        </div>
+        <div><a class="pill-btn" href="#instamart">View Case Study ↗</a></div>
+      </div>
+      <div class="visual photo">
+        <div class="phones-mini">
+          <img src="assets/instamart-2.jpg" alt="Instamart category screen" loading="lazy" width="394" height="846">
+          <img src="assets/instamart-3.jpg" alt="Instamart product listing" loading="lazy" width="396" height="846">
+          <img src="assets/instamart-4.jpg" alt="Instamart bill details" loading="lazy" width="452" height="846">
+        </div>
+      </div>
+    </article>
+    <article class="project" data-c="marble">
+      <div class="copy">
+        <div class="co"><span class="logo">M</span>Marble Sort (Voodoo) · Gaming concept study</div>
+        <h3>From Ad-Only to First Purchase</h3>
+        <p class="desc">Most players of this fast-growing puzzle game never pay, and ads are both its main revenue and its biggest complaint. How do we earn a first purchase without hurting retention?</p>
+        <div class="tags"><span>Mobile gaming</span><span>Hybrid monetisation</span><span>Prioritisation (RICE)</span></div>
+        <div class="tiles">
+          <div class="tile"><b class="tnum">11.3M+</b><span>Android installs</span></div>
+          <div class="tile"><b class="tnum">2–5%</b><span>F2P players who ever pay</span></div>
+          <div class="tile"><b>3</b><span>Concept screens</span></div>
+        </div>
+        <div><a class="pill-btn" href="#marblesort">View Case Study ↗</a></div>
+      </div>
+      <div class="visual" aria-label="Concept mock-up of the Jam Rescue offer">
+        <span class="vt">Concept: the moment the conveyor jams</span>
+        <div style="display:grid;place-items:center"><div class="phone" aria-hidden="true"><div class="screen game"><div class="sbar"><span>9:41</span><span>●●●</span></div><div class="lvl"><span>Level 961</span><span class="coins">🪙 120</span></div><div class="belt"><span class="m" style="left:14px;top:4px;background:#F25C6E"></span><span class="m" style="left:30px;top:4px;background:#2ECC71"></span><span class="m" style="left:46px;top:4px;background:#F5F7FA"></span><span class="m" style="left:62px;top:4px;background:#F7C948"></span><span class="m" style="left:78px;top:4px;background:#3DA5F5"></span><span class="m" style="left:94px;top:4px;background:#F25C6E"></span><span class="m" style="left:110px;top:4px;background:#2ECC71"></span><span class="m" style="left:126px;top:4px;background:#F5F7FA"></span><span class="m" style="left:142px;top:4px;background:#F7C948"></span><span class="m" style="left:14px;top:32px;background:#3DA5F5"></span><span class="m" style="left:30px;top:32px;background:#F25C6E"></span><span class="m" style="left:46px;top:32px;background:#2ECC71"></span><span class="m" style="left:62px;top:32px;background:#F5F7FA"></span><span class="m" style="left:78px;top:32px;background:#F7C948"></span><span class="m" style="left:94px;top:32px;background:#3A3F4A"></span><span class="m" style="left:110px;top:32px;background:#3A3F4A"></span><span class="m" style="left:126px;top:32px;background:#3A3F4A"></span><span class="m" style="left:142px;top:32px;background:#3A3F4A"></span></div><div class="trays"><span class="tray"><i style="background:#FF6B6B"></i><i style="background:#FF6B6B"></i><i style="background:#FF6B6B"></i></span><span class="tray"><i style="background:#FFD166"></i><i style="background:#FFD166"></i></span><span class="tray"><i style="background:#06D6A0"></i><i style="background:#06D6A0"></i><i style="background:#06D6A0"></i></span><span class="tray"><i style="background:#4CC9F0"></i><i style="background:#4CC9F0"></i></span></div><div class="sheet"><h5>Conveyor jammed!</h5><p>You were 2 moves from winning.</p><div class="mbtn ad"><span>▶ Watch ad</span><span>+1 slot</span></div><div class="mbtn buy"><span>Jam Rescue <span class="tagpill">₹29</span></span><span>+3 slots &amp; undo</span></div><div class="mbtn ghost">Retry level</div></div></div></div></div>
+      </div>
+    </article>
+
+    <article class="project" data-c="upi">
+      <div class="copy">
+        <div class="co"><span class="logo">₹</span>UPI payments app · FinTech concept study</div>
+        <h3>Pause Before You Pay</h3>
+        <p class="desc">Collect requests are gone, but scams aren't. Victims are now talked into sending money themselves. A risk-based "pause and check" that stops scams without slowing down everyday payments.</p>
+        <div class="tags"><span>FinTech</span><span>Trust &amp; safety</span><span>Experiment design</span></div>
+        <div class="tiles">
+          <div class="tile"><b class="tnum">₹22,495 cr</b><span>Lost to cyber fraud, 2025</span></div>
+          <div class="tile"><b class="tnum">28.15 lakh</b><span>Complaints, 2025</span></div>
+          <div class="tile"><b class="tnum">51%</b><span>UPI victims who never reported</span></div>
+        </div>
+        <div><a class="pill-btn" href="#upi">View Case Study ↗</a></div>
+      </div>
+      <div class="visual" aria-label="Payment funnel: only risky payments see a check">
+        <span class="vt">Friction only where the risk is</span>
+        <div class="cost">
+          <div class="cost-row"><span>Everyday payments</span><div class="bar"><i style="width:100%"></i></div><b>No change</b></div>
+          <div class="cost-row"><span>Risky payments</span><div class="bar"><i class="gone" style="width:14%"></i></div><b>Pause &amp; check</b></div>
+        </div>
+        <div class="checks">
+          <div>First-time payee + unusual amount</div>
+          <div>Payee flagged by other users or registries</div>
+          <div>Payment made during an active call</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section class="view" data-view="about" hidden>
+  <div class="sechead" style="padding-top:40px"><h2>About me</h2><p>Engineer by training, product person by instinct.</p></div>
+  <div class="about">
+    <div class="card">
+      <p>I'm a software engineer at FICO, where I've spent six years on DMPS, a decision-modelling and real-time analytics platform used by financial-services clients. I've worked across backend, frontend and cloud, and with Product, UX and QA through 12 releases.</p>
+      <p>What I enjoy most is the product side of the work: why a customer is stuck, which fix matters first, and how we'll know it worked. In 2025 I completed ISB's Executive Product Management program to build that practice properly.</p>
+      <p>I'm looking for an Associate Product Manager or Product Manager 1 role building user-focused consumer and B2B products, including gaming and AI.</p>
+      <div class="skills">
+        <div><span class="k">Product</span><div class="chips"><span>User research</span><span>Personas</span><span>Journey maps</span><span>Segmentation</span><span>Metric trees</span><span>Roadmapping</span></div></div>
+        <div><span class="k">Data</span><div class="chips"><span>SQL</span><span>Python</span><span>Impact sizing</span></div></div>
+        <div><span class="k">Technical</span><div class="chips"><span>REST APIs</span><span>AWS</span><span>Kafka</span><span>OpenSearch</span><span>Angular</span><span>AI-assisted dev</span></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Journey so far</h3>
+      <ol class="tl">
+        <li><div><span class="when">FICO · Present</span><h4>Software Engineer 2</h4><p>Lifecycle features, platform upgrades, OpenSearch migration.</p></div></li>
+        <li><div><span class="when">ISB · 2024–25</span><h4>Executive Product Management</h4><p>MVP definition, roadmapping, personas, positioning, conjoint analysis.</p></div></li>
+        <li><div><span class="when">FICO · 2020</span><h4>Software Engineer 1</h4><p>OpenPGP encryption job steps; backend to full stack.</p></div></li>
+        <li><div><span class="when">Chitkara University · 2017–21</span><h4>B.E. Computer Science</h4><p>GPA 9.12 / 10</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FICO ========== -->
+<article class="view case" data-view="fico" data-c="fico" hidden>
+  <a class="back" href="#work">← Back to work</a>
+  <div class="chero">
+    <div class="txt">
+      <div class="co"><span class="logo">F</span>FICO · Shipped at work · B2B FinTech</div>
+      <h1>Product decisions from the engineering seat</h1>
+      <p class="thesis">DMPS is FICO's decision-modelling and streaming analytics platform for banks and lenders. Across 12 releases I took features from design document to release, and made calls that changed cost and adoption.</p>
+    </div>
+    <div class="art pad">
+      <div class="cost">
+        <span class="k">Search licence cost / year</span>
+        <div class="cost-row"><span>Elasticsearch</span><div class="bar"><i class="gone" style="width:100%"></i></div><b class="tnum">~$1,368</b></div>
+        <div class="cost-row"><span>OpenSearch</span><div class="bar"><i style="width:2%"></i></div><b class="tnum">$0</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="summary">
+    <div class="card"><span class="lab">Cost</span><span class="big tnum">~$1,400 / yr</span><p>Licence cost removed by moving search to OpenSearch</p></div>
+    <div class="card"><span class="lab">Adoption</span><span class="big tnum">+10%</span><p>Customer adoption of the lifecycle features I owned</p></div>
+    <div class="card"><span class="lab">Delivery</span><span class="big tnum">2+ / release</span><p>Features delivered, each with design document and testing</p></div>
+  </div>
+  <div class="layout">
+    <nav class="toc" aria-label="Contents"></nav>
+    <div class="steps">
+      <section class="step" data-title="Cost decision">
+        <header><span class="n">01</span><h2>Moving off a licensed search engine</h2></header>
+        <div class="card">
+          <dl class="facts">
+            <dt>Problem</dt><dd>Elasticsearch carried a licence of about $114 a month.</dd>
+            <dt>Decision</dt><dd>Proposed open-source OpenSearch as a replacement with matching capabilities.</dd>
+            <dt>Execution</dt><dd>Assessed compatibility impact, made the application changes and validated the stack before release.</dd>
+            <dt>Outcome</dt><dd class="tnum">About $1,400 a year in licence cost removed.</dd>
+          </dl>
+        </div>
+      </section>
+      <section class="step" data-title="Feature ownership">
+        <header><span class="n">02</span><h2>Application lifecycle features</h2></header>
+        <p>I owned application promotion across environments, ZIP export and import, and transfer-status tracking end to end: requirements with product stakeholders, design, build, testing and release. Customer adoption of these features rose by 10%.</p>
+      </section>
+      <section class="step" data-title="Security">
+        <header><span class="n">03</span><h2>Keeping an enterprise product secure</h2></header>
+        <p>I delivered three to four third-party component and image upgrades per release to close security vulnerabilities, along with Angular 17, 19 and 20 upgrades. I also built OpenPGP encryption and decryption job steps for secure client data exchange.</p>
+      </section>
+    </div>
+  </div>
+  <nav class="pager" aria-label="Case studies"><a href="#upi"><span>Previous</span><b>Pause Before You Pay</b></a><a class="r" href="#rapido"><span>Next</span><b>Rapido</b></a></nav>
+</article>
+
+<!-- ========== RAPIDO ========== -->
+<article class="view case" data-view="rapido" data-c="rapido" hidden>
+  <a class="back" href="#work">← Back to work</a>
+  <div class="chero">
+    <div class="txt">
+      <div class="co"><span class="logo">R</span>Rapido · Concept study · Ride-hailing</div>
+      <h1>Minimising app switching to increase ride conversion</h1>
+      <p class="thesis">Riders on short, time-sensitive trips keep two or three ride apps open. Rapido loses the ride the moment a rider stops trusting its wait time.</p>
+    </div>
+    <div class="art"><img src="assets/rapido-cover.jpg" alt="Illustration of a ride being booked on a phone" width="960" height="720"></div>
+  </div>
+  <div class="summary">
+    <div class="card"><span class="lab">Problem</span><p>Riders switch to Ola or Uber while waiting for a captain, so requests don't convert into rides.</p></div>
+    <div class="card"><span class="lab">Solution</span><p>A live wait-time estimate, plus wait rewards and a visible captain reputation score.</p></div>
+    <div class="card"><span class="lab">Measure</span><p>Ride completion, cancellations, retention, CSAT and reward redemption.</p></div>
+  </div>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Contents"></nav>
+    <div class="steps">
+
+      <section class="step" data-title="Approach">
+        <header><span class="n">01</span><h2>Approach</h2></header>
+        <p>Goal: enhance the user experience and decision-making in ride-hailing by reducing app switching.</p>
+        <div class="g4">
+          <div class="card"><span class="stepno">1</span><h3>Identify pain points</h3><p class="small">Understand why users switch between ride-hailing apps through surveys, interviews and behaviour analysis.</p></div>
+          <div class="card"><span class="stepno">2</span><h3>Focus on experience</h3><p class="small">Make fare and ride information more accessible and transparent inside the app.</p></div>
+          <div class="card"><span class="stepno">3</span><h3>Develop solutions</h3><p class="small">Design features that offer value beyond simple fare comparison.</p></div>
+          <div class="card"><span class="stepno">4</span><h3>Test and iterate</h3><p class="small">Pilot with a small user group, then refine using their feedback.</p></div>
+        </div>
+      </section>
+
+      <section class="step" data-title="Discover">
+        <header><span class="n">02</span><h2>Discover</h2></header>
+        <div class="sub">
+          <h3>Understanding the problem space</h3>
+          <div class="seg">
+            <div><span class="k">Trip length</span><div class="opts"><span class="hit">Short distance</span><span>Long distance</span></div></div>
+            <div><span class="k">Priority</span><div class="opts"><span>Cost-effective</span><span class="hit">Time-effective</span></div></div>
+            <div><span class="k">Need</span><div class="opts"><span>Longer rides and comfort</span><span class="hit">Short rides, just need to be quick</span></div></div>
+          </div>
+          <p>Short, time-led trips are the space Rapido dominates, and where most app switching happens. This became the target segment.</p>
+        </div>
+
+        <div class="sub">
+          <h3>User personas</h3>
+          <div class="g2">
+            <div class="card">
+              <span class="k">Persona 1</span>
+              <h3>Lakshay Sharma, 18 · College student</h3>
+              <p class="q">"I usually use my monthly allowance to book rides to my college and meet my friends. I prefer quick and cheap bike rides."</p>
+              <span class="k">Key behaviours</span>
+              <ul class="list">
+                <li>Prefers frequent short-distance, quick bike rides over cab rides.</li>
+                <li>Not earning yet, so has a limited budget for rides and wants to know the exact fare before the ride starts.</li>
+                <li>Technically sound and aware of offers and ride-sharing options.</li>
+                <li>Uses all competitor apps, and would switch at even a little inconvenience.</li>
+              </ul>
+              <span class="k">Needs and pain points</span>
+              <ol class="list">
+                <li><b>Inconsistent pricing:</b> fares fluctuate during peak hours or bad weather, making rides hard to budget for.</li>
+                <li><b>Availability issues:</b> struggles to find rides during peak hours or in less popular areas.</li>
+                <li><b>Driver behaviour:</b> unprofessional behaviour or poor communication from drivers; drivers cancel or refuse rides once the booking is done.</li>
+              </ol>
+            </div>
+            <div class="card">
+              <span class="k">Persona 2</span>
+              <h3>Gautam Sharma, 40 · Working professional</h3>
+              <p class="q">"I usually have to take auto rides to my shop. I always like to be on time. Comfort and convenience are the major factors to choose between rides."</p>
+              <span class="k">Key behaviours</span>
+              <ul class="list">
+                <li>Uses Rapido daily, along with various other offline and online options.</li>
+                <li>Prefers convenience and timely rides to avoid delays.</li>
+                <li>Usually uses Rapido for short-distance travel within the city, for work or visits.</li>
+                <li>Looks for transparency in the fare breakdown and prefers competitive pricing.</li>
+                <li>Values safety, customer support, professional rides and reliability.</li>
+              </ul>
+              <span class="k">Needs and pain points</span>
+              <ol class="list">
+                <li><b>Reliable service:</b> occasional cancellations or no-shows cause inconvenience.</li>
+                <li><b>Safety concerns:</b> a priority, as he often travels with family. Inadequate customer support pushes him to competitor apps.</li>
+                <li><b>Price transparency:</b> lack of clarity in fare calculation, or unexpected surcharges.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub">
+          <h3>Why do users switch apps? Mapping the booking phases</h3>
+          <div class="phase">
+            <div class="card"><span class="flag cold">Some reports</span><h4>Checking available rides</h4><p>Some users weren't offered their preferred ride option.</p></div>
+            <div class="card hot"><span class="flag hot">Many reports</span><h4>Getting matched with a captain</h4><p>Long waits and failed matches.</p></div>
+            <div class="card hot"><span class="flag hot">Many reports</span><h4>Waiting for the captain</h4><p>Late arrivals, extra-fare demands, cancellations.</p></div>
+            <div class="card"><span class="flag cold">No issues</span><h4>Post-ride completion</h4><p>Not a focus for this study.</p></div>
+            <div class="card"><span class="flag cold">Deprioritised</span><h4>Price comparison</h4><p>Not enough data on how competitors price rides.</p></div>
+          </div>
+        </div>
+
+        <div class="sub">
+          <h3>User journey map: booking a ride on Rapido</h3>
+          <div class="chartcard">
+            <svg viewBox="0 0 660 220" role="img" aria-label="Rider mood across five booking steps: positive while choosing, falling while waiting, lowest when the captain asks for extra money.">
+              <rect class="zone" x="262" y="8" width="398" height="152" rx="12"/>
+              <line class="axis" x1="0" y1="85" x2="660" y2="85" stroke-dasharray="2 4"/>
+              <text class="lab" x="6" y="20">POSITIVE</text><text class="lab" x="6" y="154">NEGATIVE</text>
+              <text class="lab" x="276" y="24">WHERE RIDERS OPEN OTHER APPS</text>
+              <polyline class="curve" points="70,55 200,40 330,130 460,100 590,148"/>
+              <circle class="dot" cx="70" cy="55" r="6"/><circle class="dot" cx="200" cy="40" r="6"/>
+              <circle class="dot low" cx="330" cy="130" r="6"/><circle class="dot" cx="460" cy="100" r="6"/><circle class="dot low" cx="590" cy="148" r="6"/>
+              <text x="70" y="182" text-anchor="middle">Enter pickup &amp; drop</text><text class="s" x="70" y="198" text-anchor="middle">Relieved</text>
+              <text x="200" y="182" text-anchor="middle">Compare ride types</text><text class="s" x="200" y="198" text-anchor="middle">Excited</text>
+              <text x="330" y="182" text-anchor="middle">Book and wait</text><text class="s" x="330" y="198" text-anchor="middle">Sad and frustrated</text>
+              <text x="460" y="182" text-anchor="middle">Captain on the way</text><text class="s" x="460" y="198" text-anchor="middle">Frustrated but hopeful</text>
+              <text x="590" y="182" text-anchor="middle">Captain arrives</text><text class="s" x="590" y="198" text-anchor="middle">Extremely annoyed</text>
+            </svg>
+          </div>
+          <div class="tablecard">
+            <table>
+              <thead><tr><th>Step</th><th>What the rider thinks</th><th>Emotion</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Select pickup &amp; drop</th><td>"Let's see if the app can identify my aunt's apartment address."</td><td><span class="emo good">Relieved</span><br><span class="small">Autofill makes it easy</span></td></tr>
+                <tr><th scope="row">Choose a ride option</th><td>"Let me check which ride option is time-effective."</td><td><span class="emo good">Excited</span><br><span class="small">All options in one place</span></td></tr>
+                <tr class="hot"><th scope="row">Book the ride</th><td>"The wait time is too high, let me check in other apps."</td><td><span class="emo bad">Sad and frustrated</span><br><span class="small">No idea how long the wait will be</span></td></tr>
+                <tr class="hot"><th scope="row">Captain assigned</th><td>"Finally! After a long wait I got a ride. Hope he arrives fast, I'm already late."</td><td><span class="emo mid">Frustrated but optimistic</span><br><span class="small">Hopes the captain won't cancel</span></td></tr>
+                <tr class="hot"><th scope="row">Captain arrives</th><td>"To avoid restarting the process, I reluctantly paid the extra amount."</td><td><span class="emo bad">Extremely annoyed</span><br><span class="small">Feels scammed, may never reopen the app</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="step" data-title="Define">
+        <header><span class="n">03</span><h2>Define</h2></header>
+        <p class="problem">How might we reduce app switching during booking, so more ride requests become completed rides?</p>
+        <div class="sub">
+          <h3>User-reported issues in the highlighted phase</h3>
+          <ul class="list">
+            <li>Long waits for a captain to be assigned, with low driver availability at peak hours and in cities like Bengaluru and Chennai</li>
+            <li>Captains taking too long to reach pickup, often struggling to find the location</li>
+            <li>Captains demanding more than the quoted fare</li>
+            <li>Cancellation policies that penalise riders unfairly</li>
+          </ul>
+        </div>
+        <div class="sub">
+          <h3>Root causes</h3>
+          <div class="g3 why">
+            <div class="card"><h3>Why the long wait for a captain?</h3><ul class="list"><li>Low driver availability nearby</li><li>Drivers not accepting or cancelling rides</li><li>Drivers unhappy with the estimated earnings</li><li>Drivers receiving requests from far away</li></ul></div>
+            <div class="card"><h3>Why is the captain slow to arrive?</h3><ul class="list"><li>Traffic and weather</li><li>Technical and GPS problems</li><li>Still finishing the previous ride</li></ul></div>
+            <div class="card"><h3>Why do captains demand more?</h3><ul class="list"><li>Compensation feels too low</li><li>Extra effort such as waiting or luggage</li><li>Seasonal supply–demand imbalance</li></ul></div>
+          </div>
+        </div>
+        <div class="insight"><span class="lab">Key insight</span><p>Most root causes are logistical and driver-side, so Rapido can't fix them overnight. The solutions instead focus on the rider: reduce the uncertainty of the wait, and give riders a reason to stay even when competitors are one tap away.</p></div>
+      </section>
+
+      <section class="step" data-title="Ideate">
+        <header><span class="n">04</span><h2>Ideate: from pain point to direction</h2></header>
+        <div class="mapping">
+          <div class="maphead"><span class="k">Pain point</span><span></span><span class="k">Solution direction</span></div>
+          <div class="maprow"><div>Long waits to get a captain assigned</div><span class="arr" aria-hidden="true">→</span><div>Keep the rider informed with constant updates</div></div>
+          <div class="maprow"><div>Captain delays break the rider's connection with the platform</div><span class="arr" aria-hidden="true">→</span><div>Keep the rider engaged during the wait</div></div>
+          <div class="maprow"><div>Cancellation policies penalise riders for driver-side cancellations</div><span class="arr" aria-hidden="true">→</span><div>Allot balanced rides so drivers can earn more</div></div>
+          <div class="maprow"><div>Drivers demand more than the quoted fare</div><span class="arr" aria-hidden="true">→</span><div>Make the fare more transparent to riders</div></div>
+          <div class="maprow"><div>Little differentiation from Ola and Uber</div><span class="arr" aria-hidden="true">→</span><div>Add unique features that keep riders on Rapido</div></div>
+        </div>
+      </section>
+
+      <section class="step" data-title="Design">
+        <header><span class="n">05</span><h2>Design</h2></header>
+        <div class="g2">
+          <div class="card">
+            <span class="k">Solution 1</span>
+            <h3>Average wait time estimate</h3>
+            <p>Real-time, data-driven insight into how long a rider can expect to wait in their area, built from historical data and current demand and supply.</p>
+            <dl class="facts">
+              <dt>Notifications</dt><dd>Riders can opt in to push or SMS updates when the estimate changes significantly.</dd>
+              <dt>Feedback loop</dt><dd>After each ride, riders rate how accurate the estimate was, which refines the prediction model.</dd>
+            </dl>
+            <span class="k">Pain points solved</span>
+            <ol class="list"><li>Uncertainty: sets a realistic expectation, reducing anxiety</li><li>Trust in the platform</li><li>App switching, through clear wait expectations</li></ol>
+          </div>
+          <div class="card">
+            <span class="k">Solution 2</span>
+            <h3>Wait time rewards and driver reputation</h3>
+            <p>Riders are rewarded for their patience, and drivers are encouraged to stay reliable through a reputation score that riders can see.</p>
+            <dl class="facts">
+              <dt>Rewards</dt><dd class="tnum">1 minute of waiting = 10 points; 10 points = ₹5 off the next ride.</dd>
+              <dt>Reputation</dt><dd>Riders can downvote a driver who cancels after contacting them. The higher the score, the less likely a driver is to cancel.</dd>
+            </dl>
+            <span class="k">Pain points solved</span>
+            <ol class="list"><li>Rider frustration</li><li>Driver reliability concerns</li><li>Cancellation anxiety, since scores are public</li><li>Differentiation from competitors</li></ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="step" data-title="Measure">
+        <header><span class="n">06</span><h2>Measure</h2></header>
+        <div class="tablecard">
+          <table>
+            <thead><tr><th>Metric</th><th class="c">Solution 1</th><th class="c">Solution 2</th></tr></thead>
+            <tbody>
+              <tr><td>User retention rate</td><td class="c"><span class="yes">✓</span></td><td class="c"><span class="yes">✓</span></td></tr>
+              <tr><td>Ride completion rate</td><td class="c"><span class="yes">✓</span></td><td class="c"></td></tr>
+              <tr><td>Wait-time estimate accuracy</td><td class="c"><span class="yes">✓</span></td><td class="c"></td></tr>
+              <tr><td>CSAT</td><td class="c"><span class="yes">✓</span></td><td class="c"></td></tr>
+              <tr><td>Average wait time</td><td class="c"></td><td class="c"><span class="yes">✓</span></td></tr>
+              <tr><td>Ride cancellation rate</td><td class="c"></td><td class="c"><span class="yes">✓</span></td></tr>
+              <tr><td>Reward redemption rate</td><td class="c"></td><td class="c"><span class="yes">✓</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Validation plan: pilot both features with a small rider group, gather feedback, and refine before a wider rollout.</p>
+      </section>
+
+      <section class="step" data-title="Risks">
+        <header><span class="n">07</span><h2>Risks and mitigations</h2></header>
+        <div class="risks">
+          <div class="risk"><p><span>Risk</span>Estimates are inaccurate and break trust further.</p><p><span>Mitigation</span>Use real-time data and ML models that improve with feedback.</p></div>
+          <div class="risk"><p><span>Risk</span>Riders read the estimate as a guarantee.</p><p><span>Mitigation</span>Say clearly that it is an average, not a promise.</p></div>
+          <div class="risk"><p><span>Risk</span>More rider queries strain operations.</p><p><span>Mitigation</span>An active support system to handle questions.</p></div>
+          <div class="risk"><p><span>Risk</span>Riders inflate wait times to farm points.</p><p><span>Mitigation</span>Cap the points that can be earned per ride.</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <nav class="pager" aria-label="Case studies"><a href="#fico"><span>Previous</span><b>FICO DMPS</b></a><a class="r" href="#instamart"><span>Next</span><b>Swiggy Instamart</b></a></nav>
+</article>
+
+<!-- ========== INSTAMART ========== -->
+<article class="view case" data-view="instamart" data-c="insta" hidden>
+  <a class="back" href="#work">← Back to work</a>
+  <div class="chero">
+    <div class="txt">
+      <div class="co"><span class="logo">S</span>Swiggy Instamart · Product teardown · Quick commerce</div>
+      <h1>InstaRestocker: raising Instamart's order value by 10%</h1>
+      <p class="thesis">Instamart users place many small, urgent orders, and small baskets hurt unit economics. InstaRestocker predicts what a household is about to run out of, so it arrives in one larger order.</p>
+    </div>
+    <div class="art logo-art">
+      <img src="assets/swiggy-logo.png" alt="Swiggy logo" width="180" height="168">
+    </div>
+  </div>
+  <div class="summary">
+    <div class="card"><span class="lab">Objective</span><p>Increase average order value by 10% to move Instamart toward profitability.</p></div>
+    <div class="card"><span class="lab">Solution</span><p>An AI restock assistant that suggests a ready basket before items run out.</p></div>
+    <div class="card"><span class="lab">Modelled impact</span><span class="big tnum">₹400 → ₹440</span></div>
+  </div>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Contents"></nav>
+    <div class="steps">
+
+      <section class="step" data-title="Context">
+        <header><span class="n">01</span><h2>Context: Swiggy and Instamart</h2></header>
+        <p>Swiggy is an Indian food ordering and delivery company, founded in 2014 and headquartered in Bengaluru. It operated in more than 580 Indian cities as of July 2023, and runs quick commerce under the name Instamart. Its main rival in food delivery is Eternal (formerly Zomato).</p>
+        <div class="sub">
+          <h3>Business model: six revenue streams</h3>
+          <div class="g3">
+            <div class="card stream"><h4>1. Food delivery</h4><ul><li>15–25% commission from restaurants</li><li>Delivery and handling charges</li><li>Surge pricing and platform fees</li></ul></div>
+            <div class="card stream"><h4>2. Instamart</h4><ul><li>10–20% product margins</li><li>Delivery charges</li><li>Higher-margin private labels</li></ul></div>
+            <div class="card stream"><h4>3. Dineout</h4><ul><li>Commission on table bookings</li><li>Gourmet Passport subscription</li><li>Promoted restaurant listings</li></ul></div>
+            <div class="card stream"><h4>4. Swiggy Genie</h4><ul><li>Pickup and drop delivery fees</li><li>Margin after logistics cost</li></ul></div>
+            <div class="card stream"><h4>5. Ads and promotions</h4><ul><li>Sponsored listings (restaurants, FMCG)</li><li>In-app banners and campaigns</li></ul></div>
+            <div class="card stream"><h4>6. Swiggy One</h4><ul><li>Monthly or annual subscription</li><li>Free delivery and discounts across services</li></ul></div>
+          </div>
+        </div>
+        <div class="g2">
+          <div class="card"><span class="k">Competition</span><div class="chips"><span>Zomato</span><span>Blinkit</span><span>Zepto</span><span>Amazon</span><span>Flipkart Minutes</span></div></div>
+          <div class="card"><span class="k">What Swiggy helps users achieve</span><div class="chips"><span>Doorstep delivery</span><span>Time saved</span><span>Restaurant offers</span><span>Parcel delivery</span></div></div>
+        </div>
+      </section>
+
+      <section class="step" data-title="User flow">
+        <header><span class="n">02</span><h2>Current user flow on Instamart</h2></header>
+        <div class="flow">
+          <figure><img src="assets/instamart-1.jpg" alt="Swiggy home screen showing the Instamart section" loading="lazy" width="400" height="846"><figcaption><b>1. Home</b>Instamart has its own section on the first screen.</figcaption></figure>
+          <span class="arrow" aria-hidden="true">→</span>
+          <figure><img src="assets/instamart-2.jpg" alt="Instamart grocery categories" loading="lazy" width="394" height="846"><figcaption><b>2. Browse</b>Categories for grocery, electronics, medicines and more.</figcaption></figure>
+          <span class="arrow" aria-hidden="true">→</span>
+          <figure><img src="assets/instamart-3.jpg" alt="Product listing with weight and price" loading="lazy" width="396" height="846"><figcaption><b>3. Add to cart</b>Listings show quality, weight and price.</figcaption></figure>
+          <span class="arrow" aria-hidden="true">→</span>
+          <figure><img src="assets/instamart-4.jpg" alt="Bill details with fees" loading="lazy" width="452" height="846"><figcaption><b>4. Pay</b>Item total plus handling fee, GST and a small-cart fee.</figcaption></figure>
+        </div>
+        <div class="insight"><span class="lab">Observation</span><p>The bill shows a ₹15 small-cart fee and a prompt to add ₹134 more for free delivery. Small baskets are expensive for the user and for Swiggy, which is exactly the problem this study targets.</p></div>
+      </section>
+
+      <section class="step" data-title="Objective">
+        <header><span class="n">03</span><h2>Objective</h2></header>
+        <p class="problem">Increase average order value (AOV) by 10% to reach profitability through Swiggy Instamart.</p>
+        <div class="g2">
+          <div class="card"><h3>Why AOV matters</h3><p>As average order value rises, unit economics turn profitable. Profit per order = revenue per order − cost per order, and a bigger basket spreads the fixed delivery cost.</p></div>
+          <div class="card"><h3>Product outcomes</h3><ul class="list"><li><b>Fewer orders:</b> combining orders, while total value holds or grows, optimises operations.</li><li><b>Higher total value:</b> total order value moves with AOV, so each order adds more to revenue.</li></ul></div>
+        </div>
+        <div class="card"><span class="k">Actors in the ecosystem</span><div class="chips"><span>Customer</span><span>Instamart app</span><span>Delivery partners</span><span>Warehouse employees</span><span>Relatives and friends (secondary)</span></div></div>
+      </section>
+
+      <section class="step" data-title="Users">
+        <header><span class="n">04</span><h2>Target users and insights</h2></header>
+        <div class="g2">
+          <div class="card">
+            <span class="k">Persona 1</span>
+            <h3>Vikram, 27 · Software engineer</h3>
+            <dl class="facts">
+              <dt>Location</dt><dd>Bengaluru</dd>
+              <dt>Goal</dt><dd>Generally gets late from office and often forgets to buy groceries. Needs a quick solution so that after a long day he gets groceries easily, or can order food and get it in minutes without hassle.</dd>
+              <dt>Usage</dt><dd>Orders food or groceries daily.</dd>
+              <dt>Motivation</dt><dd>Comfort and convenience; the price difference is very small.</dd>
+              <dt>Requirement</dt><dd>Doesn't want to go grocery shopping and wants things at his fingertips. He lives in Bengaluru, already suffers from traffic and rain, and is never in the mood to go out after coming home from office.</dd>
+            </dl>
+            <div class="insight"><span class="lab">User insight: urgency-based ordering</span><p class="small" style="color:var(--ink)">Most users order impulsively when they run out of something, rather than planning ahead or making larger, stock-up purchases. This leads to frequent, small orders.</p></div>
+          </div>
+          <div class="card">
+            <span class="k">Persona 2</span>
+            <h3>Sunita, 50 · Homemaker</h3>
+            <dl class="facts">
+              <dt>Location</dt><dd>Chandigarh</dd>
+              <dt>Goal</dt><dd>Orders food from outside once a week.</dd>
+              <dt>Usage</dt><dd>Uses the app rarely.</dd>
+              <dt>Motivation</dt><dd>Only sometimes, to have something different.</dd>
+              <dt>Requirement</dt><dd>If household chores mean she or her husband can't go grocery shopping, she just needs a small quantity of a few limited items on the spot.</dd>
+            </dl>
+            <div class="insight"><span class="lab">User insight: price comparison</span><p class="small" style="color:var(--ink)">Users feel the need to compare prices across apps and offline stores. They might find better deals elsewhere, or perceive the app's prices to be generally high.</p></div>
+          </div>
+        </div>
+        <div class="card">
+          <span class="k">Why does this happen?</span>
+          <h3>Price sensitivity</h3>
+          <p>Users are sensitive to price, and a perception of high prices due to lack of comparison makes them hesitant to commit to larger orders.</p>
+        </div>
+      </section>
+
+      <section class="step" data-title="Solution">
+        <header><span class="n">05</span><h2>Solution: InstaRestocker</h2></header>
+        <div class="card" style="background:linear-gradient(135deg,var(--t),var(--t2))">
+          <span class="k">Objective</span>
+          <p style="font-size:1.02rem">Improve convenience and retention with an AI-based restocking tool that predicts when each user will need to restock, based on their personal usage of perishable and non-perishable items.</p>
+        </div>
+        <ol class="list">
+          <li>Learns each household's buying rhythm from past orders.</li>
+          <li>Predicts which items will run low and when.</li>
+          <li>Suggests one ready-made restock basket before the urgent moment arrives, so three small orders become one.</li>
+        </ol>
+      </section>
+
+      <section class="step" data-title="Impact">
+        <header><span class="n">06</span><h2>Business impact</h2></header>
+        <p>If users in the target segment consolidate their orders, the impact can be mapped as follows.</p>
+        <div class="g2">
+          <div class="formula">New orders = Original orders ÷ (1 + % increase in order value)</div>
+          <div class="formula">AOV lift (segment) = % increase in AOV × share who consolidate</div>
+          <div class="formula">AOV lift (overall) = Segment lift × segment share of users</div>
+          <div class="formula">New AOV = Current AOV × (1 + overall lift)</div>
+        </div>
+        <div class="tablecard">
+          <table>
+            <thead><tr><th>Input</th><th>Assumption</th><th class="num">Value</th></tr></thead>
+            <tbody>
+              <tr><td>Target segment</td><td>Share of all users</td><td class="num">50%</td></tr>
+              <tr><td>Order frequency</td><td>Target segment, per month</td><td class="num">12</td></tr>
+              <tr><td>Adoption</td><td>Target users who consolidate</td><td class="num">50%</td></tr>
+              <tr><td>Consolidation</td><td>Share of their orders combined</td><td class="num">40%</td></tr>
+              <tr><td>New order frequency</td><td>12 ÷ 1.4</td><td class="num">≈ 8.57 / month</td></tr>
+              <tr><td>AOV lift, target segment</td><td>40% × 50%</td><td class="num">+20%</td></tr>
+              <tr><td>AOV lift, all users</td><td>20% × 50%</td><td class="num">+10%</td></tr>
+              <tr class="total"><td>Average order value</td><td>₹400 × 1.10</td><td class="num">₹400 → ₹440</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small">Assumptions are illustrative, chosen to size the opportunity.</p>
+      </section>
+
+      <section class="step" data-title="Metrics">
+        <header><span class="n">07</span><h2>Measuring success</h2></header>
+        <div class="tablecard">
+          <table>
+            <thead><tr><th>Level</th><th>Metric</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">North Star</th><td>% increase in profitability as a function of AOV</td></tr>
+              <tr><th scope="row">L1</th><td>% increase in average order value</td></tr>
+              <tr><th scope="row">L2</th><td>% increase in total order value; % decrease in order count, given total value doesn't fall</td></tr>
+              <tr><th scope="row">Activation</th><td>Click-through rate to open InstaRestocker full screen; % of users who visit the reorder section</td></tr>
+              <tr><th scope="row">Adoption</th><td>% of users who add at least one item from InstaRestocker; average time spent in the first session</td></tr>
+              <tr><th scope="row">Engagement</th><td>Average time on InstaRestocker per session; % of items in one order from InstaRestocker; % of users ordering mainly through it</td></tr>
+              <tr><th scope="row">Satisfaction</th><td>NPS: how likely activated users are to recommend the feature to family and friends</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="step" data-title="Risks">
+        <header><span class="n">08</span><h2>Risks and opportunities</h2></header>
+        <div class="risks">
+          <div class="risk"><p><span>Risk</span>Prediction accuracy drops when users also buy outside Swiggy.</p><p><span>Opportunity</span>Cross-platform integration to track purchases from several sources and keep predictions accurate.</p></div>
+          <div class="risk"><p><span>Risk</span>Larger orders already qualify for free delivery, so the nudge to add more disappears and users stick to need-based items.</p><p><span>Opportunity</span>Targeted nudges and incentives beyond free delivery to encourage extra purchases.</p></div>
+          <div class="risk"><p><span>Risk</span>Users only repurchase the same products, limiting discovery of higher-value items.</p><p><span>Opportunity</span>A "try this instead" nudge in a later release.</p></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <nav class="pager" aria-label="Case studies"><a href="#rapido"><span>Previous</span><b>Rapido</b></a><a class="r" href="#marblesort"><span>Next</span><b>Marble Sort</b></a></nav>
+</article>
+
+<!-- ========== MARBLE SORT ========== -->
+<article class="view case" data-view="marblesort" data-c="marble" hidden>
+  <a class="back" href="#work">← Back to work</a>
+  <div class="chero">
+    <div class="txt">
+      <div class="co"><span class="logo">M</span>Marble Sort (Voodoo) · Concept study · Mobile gaming</div>
+      <h1>From ad-only players to a first purchase</h1>
+      <p class="thesis">Marble Sort is one of 2026's fastest-scaling conveyor puzzles. Like most free-to-play games, the vast majority of its players never pay, and forced ads are the most common complaint. This study designs a path from "watching ads" to "first purchase" that players welcome rather than resent.</p>
+    </div>
+    <div class="art pad" style="display:grid;place-items:center"><div class="phone" aria-hidden="true"><div class="screen game"><div class="sbar"><span>9:41</span><span>●●●</span></div><div class="lvl"><span>Level 961</span><span class="coins">🪙 120</span></div><div class="belt"><span class="m" style="left:14px;top:4px;background:#F25C6E"></span><span class="m" style="left:30px;top:4px;background:#2ECC71"></span><span class="m" style="left:46px;top:4px;background:#F5F7FA"></span><span class="m" style="left:62px;top:4px;background:#F7C948"></span><span class="m" style="left:78px;top:4px;background:#3DA5F5"></span><span class="m" style="left:94px;top:4px;background:#F25C6E"></span><span class="m" style="left:110px;top:4px;background:#2ECC71"></span><span class="m" style="left:126px;top:4px;background:#F5F7FA"></span><span class="m" style="left:142px;top:4px;background:#F7C948"></span><span class="m" style="left:14px;top:32px;background:#3DA5F5"></span><span class="m" style="left:30px;top:32px;background:#F25C6E"></span><span class="m" style="left:46px;top:32px;background:#2ECC71"></span><span class="m" style="left:62px;top:32px;background:#F5F7FA"></span><span class="m" style="left:78px;top:32px;background:#F7C948"></span><span class="m" style="left:94px;top:32px;background:#3A3F4A"></span><span class="m" style="left:110px;top:32px;background:#3A3F4A"></span><span class="m" style="left:126px;top:32px;background:#3A3F4A"></span><span class="m" style="left:142px;top:32px;background:#3A3F4A"></span></div><div class="trays"><span class="tray"><i style="background:#FF6B6B"></i><i style="background:#FF6B6B"></i><i style="background:#FF6B6B"></i></span><span class="tray"><i style="background:#FFD166"></i><i style="background:#FFD166"></i></span><span class="tray"><i style="background:#06D6A0"></i><i style="background:#06D6A0"></i><i style="background:#06D6A0"></i></span><span class="tray"><i style="background:#4CC9F0"></i><i style="background:#4CC9F0"></i></span></div><div class="sheet"><h5>Conveyor jammed!</h5><p>You were 2 moves from winning.</p><div class="mbtn ad"><span>▶ Watch ad</span><span>+1 slot</span></div><div class="mbtn buy"><span>Jam Rescue <span class="tagpill">₹29</span></span><span>+3 slots &amp; undo</span></div><div class="mbtn ghost">Retry level</div></div></div></div></div>
+  </div>
+  <div class="summary">
+    <div class="card"><span class="lab">Problem</span><p>Only 2–5% of free-to-play players ever spend, and interruptive ads push the rest away.</p></div>
+    <div class="card"><span class="lab">Solution</span><p>A watched-ads-to-offer bridge, plus a low-price "Ad-Light Pass", chosen through RICE.</p></div>
+    <div class="card"><span class="lab">Measure</span><p>First-purchase conversion and revenue per daily player, with Day-7 retention as a guardrail.</p></div>
+  </div>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Contents"></nav>
+    <div class="steps">
+
+      <section class="step" data-title="Context">
+        <header><span class="n">01</span><h2>Context: the game and the market</h2></header>
+        <p>Marble Sort is a physics puzzle by Voodoo, launched in October 2025. Players tap boxes to release marbles, which ride a circular conveyor into matching three-slot trays. The conveyor never stops, so a level is lost when it jams.</p>
+        <div class="g4">
+          <div class="card"><span class="k">Android installs</span><span class="stat tnum">11.3M+</span></div>
+          <div class="card"><span class="k">Play Store rating</span><span class="stat tnum">4.58★</span><p class="small">75K ratings</p></div>
+          <div class="card"><span class="k">New installs / month</span><span class="stat tnum">~679K</span><p class="small">Third-party estimate</p></div>
+          <div class="card"><span class="k">Monetisation</span><span class="stat">Hybrid</span><p class="small">Ads + coin packs from A$2.99 (Australian store) + Tidal Pass</p></div>
+        </div>
+        <div class="g2">
+          <div class="card"><h3>How the industry earns</h3><ul class="list"><li>In growing markets like India, ads bring roughly 55–70% of game revenue. In mature markets, in-app purchases bring 77–90%.</li><li>Puzzle games earn 53% of all mobile-game ad revenue.</li><li>Casual games typically split revenue 40–60% between purchases and ads.</li></ul></div>
+          <div class="card"><h3>Why the first purchase matters</h3><ul class="list"><li>Only 2–5% of daily players in most free-to-play games ever spend.</li><li>The top 1% of players generate over half of revenue.</li><li>So the first purchase is the hardest step, and the one that opens the door to every later offer.</li></ul></div>
+        </div>
+      </section>
+
+      <section class="step" data-title="Core loop">
+        <header><span class="n">02</span><h2>Core loop and where money is made</h2></header>
+        <div class="loop" role="list">
+          <span class="node" role="listitem">Tap a box</span><span class="ar" aria-hidden="true">→</span>
+          <span class="node" role="listitem">Marbles ride the conveyor</span><span class="ar" aria-hidden="true">→</span>
+          <span class="node" role="listitem">Fill matching trays</span><span class="ar" aria-hidden="true">→</span>
+          <span class="node hot" role="listitem">Clear the level, or the conveyor jams</span><span class="ar" aria-hidden="true">→</span>
+          <span class="node" role="listitem">Reward, ad, or offer</span>
+        </div>
+        <p>The jam is the emotional peak of every level: the player is one move from winning and wants help now. It is the natural moment for a rewarded ad or a purchase. Today that moment is often followed by a forced ad instead.</p>
+        <h3 style="font-size:1.05rem;font-weight:600">Current player flow</h3>
+        <div class="flow full">
+          <figure><img src="assets/marble-1-splash.jpg" alt="Marble Sort splash screen" width="420" height="910"><figcaption><b>1. Launch</b>Splash screen, Voodoo branding.</figcaption></figure>
+          <span class="arrow" aria-hidden="true">→</span>
+          <figure><img src="assets/marble-2-home.jpg" alt="Home screen with level 960, events, chests and a No Ads button" width="420" height="910"><figcaption><b>2. Home</b>Next level, live events, timed chests, the shop and a No Ads offer.</figcaption></figure>
+          <span class="arrow" aria-hidden="true">→</span>
+          <figure><img src="assets/marble-3-level.jpg" alt="Start of a Very Hard level with three boosters" width="420" height="910"><figcaption><b>3. Level start</b>A "Very Hard" level, with three boosters unlocked by watching ads.</figcaption></figure>
+          <span class="arrow" aria-hidden="true">→</span>
+          <figure><img src="assets/marble-4-play.jpg" alt="Mid-level with marbles filling the conveyor" width="420" height="910"><figcaption><b>4. Playing</b>Marbles queue on the conveyor; when it fills, the level is lost.</figcaption></figure>
+          <span class="arrow" aria-hidden="true">→</span>
+          <figure><img src="assets/marble-5-ad.jpg" alt="Full-screen video ad for a trading app" width="420" height="910"><figcaption><b>5. Level ends</b>A full-screen video ad plays after a level is won or lost.</figcaption></figure>
+        </div>
+        <p class="small">Screenshots from my own play-through on iOS, level 960.</p>
+        <div class="card">
+          <span class="k">What I noticed while playing</span>
+          <ul class="list">
+            <li><b>A No Ads purchase already exists</b> on the home screen, so the question isn't whether to offer ad removal, but how to make a first purchase feel worth it.</li>
+            <li><b>Boosters are unlocked by rewarded ads</b> (the video badge on each booster). Players who use them are already trading attention for help, which is the strongest sign of buying intent.</li>
+            <li><b>Forced ads follow every result:</b> a full-screen video plays whether the player has just won or lost. Losing a "Very Hard" level and then sitting through an ad is a double frustration.</li>
+            <li><b>Ad quality is a risk:</b> the ad shown was for a leveraged trading app offering a "50% deposit bonus", inside a game rated 4+. That is a brand-safety issue as much as a revenue one.</li>
+            <li><b>Plenty of engagement hooks:</b> three live events, timed chests and a win-streak meter. These are good places for an offer that doesn't interrupt play.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="step" data-title="Players">
+        <header><span class="n">03</span><h2>What players are saying</h2></header>
+        <div class="g2">
+          <div class="card"><span class="k">Complaint 1</span><h3>Forced ads arrive mid-way</h3><p class="small">A reviewer notes ads became compulsory well into the game, after none appeared earlier. Another says the bottom banner shrinks the play area.</p></div>
+          <div class="card"><span class="k">Complaint 2</span><h3>Hard levels feel paywalled</h3><p class="small">Players say levels get hard and the helpful tools cost money, and that the Crown Pass only rewards wins.</p></div>
+        </div>
+        <div class="g2">
+          <div class="card">
+            <span class="k">Persona (illustrative)</span>
+            <h3>Ananya, 24 · Commuter, Bengaluru</h3>
+            <p class="q">"I play on the metro to switch off. Then an ad pops up right after I win and kills the mood."</p>
+            <dl class="facts"><dt>Plays</dt><dd>15–20 minutes a day, in short bursts</dd><dt>Spends</dt><dd>Never; thinks ₹250 is too much "for a game"</dd><dt>Would pay for</dt><dd>Fewer interruptions, at a small price</dd></dl>
+          </div>
+          <div class="card">
+            <span class="k">Persona (illustrative)</span>
+            <h3>Rohit, 35 · Sales manager, Delhi</h3>
+            <p class="q">"I happily watch an ad for a booster when I'm stuck. I'd buy one if it were cheap."</p>
+            <dl class="facts"><dt>Plays</dt><dd>30–45 minutes at night, chasing hard levels</dd><dt>Spends</dt><dd>Nothing yet; watches 5+ rewarded ads a day</dd><dt>Would pay for</dt><dd>Help at the exact moment he is stuck</dd></dl>
+          </div>
+        </div>
+        <div class="insight"><span class="lab">Key insight</span><p>Ad-only players are not "non-payers". They already pay with their attention, and some (like Rohit) show clear buying intent by repeatedly watching rewarded ads. The gap is a first offer that is small, well-timed and tied to something they already value.</p></div>
+      </section>
+
+      <section class="step" data-title="Define">
+        <header><span class="n">04</span><h2>Define</h2></header>
+        <p class="problem">How might we turn engaged ad-only players into first-time payers, without lowering retention or ad revenue from players who will never pay?</p>
+        <ul class="list">
+          <li><b>Target segment:</b> players active for 7+ days who have never paid, especially heavy rewarded-ad watchers.</li>
+          <li><b>Out of scope:</b> existing payers and high spenders, who need different offers.</li>
+        </ul>
+      </section>
+
+      <section class="step" data-title="Prioritise">
+        <header><span class="n">05</span><h2>Ideas, prioritised with RICE</h2></header>
+        <div class="tablecard rice">
+          <table>
+            <thead><tr><th>Idea</th><th class="num">Reach</th><th class="num">Impact</th><th class="num">Confidence</th><th class="num">Effort</th><th class="num">Score</th></tr></thead>
+            <tbody>
+              <tr class="pick"><td><b>Ad-to-offer bridge:</b> after 5 rewarded ads in a week, offer a small booster pack</td><td class="num">6</td><td class="num">2</td><td class="num">50%</td><td class="num">1</td><td class="num"><b>6.0</b></td></tr>
+              <tr class="pick"><td><b>Ad-Light Pass:</b> a cheaper, monthly alternative to the existing No Ads purchase that skips forced ads after a loss</td><td class="num">8</td><td class="num">2</td><td class="num">70%</td><td class="num">2</td><td class="num"><b>5.6</b></td></tr>
+              <tr><td><b>Jam Rescue:</b> a contextual offer when the conveyor jams</td><td class="num">9</td><td class="num">1.5</td><td class="num">60%</td><td class="num">1.5</td><td class="num">5.4</td></tr>
+              <tr><td><b>Pass rework:</b> pass progress for attempts, not only wins</td><td class="num">5</td><td class="num">1</td><td class="num">60%</td><td class="num">2</td><td class="num">1.5</td></tr>
+              <tr><td><b>Web shop</b> with lower prices outside the app store</td><td class="num">2</td><td class="num">2</td><td class="num">40%</td><td class="num">3</td><td class="num">0.5</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small">Reach = share of weekly target players reached (1–10). Impact = 0.5–3. Effort = person-months. Scores are illustrative estimates.</p>
+        <p><b>MVP:</b> ship the ad-to-offer bridge and the Ad-Light Pass together. Jam Rescue follows in phase 2, reusing the same offer system.</p>
+      </section>
+
+      <section class="step" data-title="Design">
+        <header><span class="n">06</span><h2>Design: concept screens</h2></header>
+        <div class="mocks">
+          <figure class="mockwrap"><div class="phone" aria-hidden="true"><div class="screen game"><div class="sbar"><span>9:41</span><span>●●●</span></div><div class="lvl"><span>Level 961</span><span class="coins">🪙 120</span></div><div class="belt"><span class="m" style="left:14px;top:4px;background:#F25C6E"></span><span class="m" style="left:30px;top:4px;background:#2ECC71"></span><span class="m" style="left:46px;top:4px;background:#F5F7FA"></span><span class="m" style="left:62px;top:4px;background:#F7C948"></span><span class="m" style="left:78px;top:4px;background:#3DA5F5"></span><span class="m" style="left:94px;top:4px;background:#F25C6E"></span><span class="m" style="left:110px;top:4px;background:#2ECC71"></span><span class="m" style="left:126px;top:4px;background:#F5F7FA"></span><span class="m" style="left:142px;top:4px;background:#F7C948"></span><span class="m" style="left:14px;top:32px;background:#3DA5F5"></span><span class="m" style="left:30px;top:32px;background:#F25C6E"></span><span class="m" style="left:46px;top:32px;background:#2ECC71"></span><span class="m" style="left:62px;top:32px;background:#F5F7FA"></span><span class="m" style="left:78px;top:32px;background:#F7C948"></span><span class="m" style="left:94px;top:32px;background:#3A3F4A"></span><span class="m" style="left:110px;top:32px;background:#3A3F4A"></span><span class="m" style="left:126px;top:32px;background:#3A3F4A"></span><span class="m" style="left:142px;top:32px;background:#3A3F4A"></span></div><div class="trays"><span class="tray"><i style="background:#FF6B6B"></i><i style="background:#FF6B6B"></i><i style="background:#FF6B6B"></i></span><span class="tray"><i style="background:#FFD166"></i><i style="background:#FFD166"></i></span><span class="tray"><i style="background:#06D6A0"></i><i style="background:#06D6A0"></i><i style="background:#06D6A0"></i></span><span class="tray"><i style="background:#4CC9F0"></i><i style="background:#4CC9F0"></i></span></div><div class="sheet"><span class="tagpill" style="justify-self:start">ONE-TIME OFFER</span><h5>Thanks for watching 5 ads this week!</h5><p>Skip the wait next time with a Starter Box.</p><div class="perks"><span>5 Magnet boosters</span><span>3 Shuffle boosters</span><span>500 coins</span></div><div class="mbtn buy"><span>Get Starter Box</span><span>₹29</span></div><div class="mbtn ghost">Maybe later</div></div></div></div><figcaption><b>1. Ad-to-offer bridge</b>Shown after a player's 5th rewarded ad in a week.</figcaption></figure>
+          <figure class="mockwrap"><div class="phone" aria-hidden="true"><div class="screen game"><div class="sbar"><span>9:41</span><span>●●●</span></div><div class="lvl"><span>Level 961</span><span class="coins">🪙 120</span></div><div class="belt"><span class="m" style="left:14px;top:4px;background:#F25C6E"></span><span class="m" style="left:30px;top:4px;background:#2ECC71"></span><span class="m" style="left:46px;top:4px;background:#F5F7FA"></span><span class="m" style="left:62px;top:4px;background:#F7C948"></span><span class="m" style="left:78px;top:4px;background:#3DA5F5"></span><span class="m" style="left:94px;top:4px;background:#F25C6E"></span><span class="m" style="left:110px;top:4px;background:#2ECC71"></span><span class="m" style="left:126px;top:4px;background:#F5F7FA"></span><span class="m" style="left:142px;top:4px;background:#F7C948"></span><span class="m" style="left:14px;top:32px;background:#3DA5F5"></span><span class="m" style="left:30px;top:32px;background:#F25C6E"></span><span class="m" style="left:46px;top:32px;background:#2ECC71"></span><span class="m" style="left:62px;top:32px;background:#F5F7FA"></span><span class="m" style="left:78px;top:32px;background:#F7C948"></span><span class="m" style="left:94px;top:32px;background:#3A3F4A"></span><span class="m" style="left:110px;top:32px;background:#3A3F4A"></span><span class="m" style="left:126px;top:32px;background:#3A3F4A"></span><span class="m" style="left:142px;top:32px;background:#3A3F4A"></span></div><div class="trays"><span class="tray"><i style="background:#FF6B6B"></i><i style="background:#FF6B6B"></i><i style="background:#FF6B6B"></i></span><span class="tray"><i style="background:#FFD166"></i><i style="background:#FFD166"></i></span><span class="tray"><i style="background:#06D6A0"></i><i style="background:#06D6A0"></i><i style="background:#06D6A0"></i></span><span class="tray"><i style="background:#4CC9F0"></i><i style="background:#4CC9F0"></i></span></div><div class="sheet"><h5>Ad-Light Pass</h5><p>Play without interruptions.</p><div class="perks"><span>No forced ads between levels</span><span>No banner: full play area</span><span>Rewarded ads stay optional</span><span>+1 free booster daily</span></div><div class="mbtn buy"><span>Start pass</span><span>₹99 / month</span></div><div class="mbtn ghost">Not now</div></div></div></div><figcaption><b>2. Ad-Light Pass</b>A low-price entry point next to today's No Ads purchase.</figcaption></figure>
+          <figure class="mockwrap"><div class="phone" aria-hidden="true"><div class="screen game"><div class="sbar"><span>9:41</span><span>●●●</span></div><div class="lvl"><span>Level 961</span><span class="coins">🪙 120</span></div><div class="belt"><span class="m" style="left:14px;top:4px;background:#F25C6E"></span><span class="m" style="left:30px;top:4px;background:#2ECC71"></span><span class="m" style="left:46px;top:4px;background:#F5F7FA"></span><span class="m" style="left:62px;top:4px;background:#F7C948"></span><span class="m" style="left:78px;top:4px;background:#3DA5F5"></span><span class="m" style="left:94px;top:4px;background:#F25C6E"></span><span class="m" style="left:110px;top:4px;background:#2ECC71"></span><span class="m" style="left:126px;top:4px;background:#F5F7FA"></span><span class="m" style="left:142px;top:4px;background:#F7C948"></span><span class="m" style="left:14px;top:32px;background:#3DA5F5"></span><span class="m" style="left:30px;top:32px;background:#F25C6E"></span><span class="m" style="left:46px;top:32px;background:#2ECC71"></span><span class="m" style="left:62px;top:32px;background:#F5F7FA"></span><span class="m" style="left:78px;top:32px;background:#F7C948"></span><span class="m" style="left:94px;top:32px;background:#3A3F4A"></span><span class="m" style="left:110px;top:32px;background:#3A3F4A"></span><span class="m" style="left:126px;top:32px;background:#3A3F4A"></span><span class="m" style="left:142px;top:32px;background:#3A3F4A"></span></div><div class="trays"><span class="tray"><i style="background:#FF6B6B"></i><i style="background:#FF6B6B"></i><i style="background:#FF6B6B"></i></span><span class="tray"><i style="background:#FFD166"></i><i style="background:#FFD166"></i></span><span class="tray"><i style="background:#06D6A0"></i><i style="background:#06D6A0"></i><i style="background:#06D6A0"></i></span><span class="tray"><i style="background:#4CC9F0"></i><i style="background:#4CC9F0"></i></span></div><div class="sheet"><h5>Conveyor jammed!</h5><p>You were 2 moves from winning.</p><div class="mbtn ad"><span>▶ Watch ad</span><span>+1 slot</span></div><div class="mbtn buy"><span>Jam Rescue <span class="tagpill">₹29</span></span><span>+3 slots &amp; undo</span></div><div class="mbtn ghost">Retry level</div></div></div></div><figcaption><b>3. Jam Rescue (phase 2)</b>Free and paid help at the moment of need.</figcaption></figure>
+        </div>
+        <p class="small">Concept mock-ups, not Voodoo's designs. Prices in rupees are assumptions to test.</p>
+        <div class="g3">
+          <div class="card"><h3>Price low, then ladder up</h3><p class="small">A ₹29 first pack removes the "too much for a game" barrier. Repeat offers can climb towards the store's current packs.</p></div>
+          <div class="card"><h3>Keep rewarded ads</h3><p class="small">The pass removes forced ads after a result. Rewarded ads for boosters stay, since players choose them.</p></div>
+          <div class="card"><h3>Respect the moment</h3><p class="small">No offer right after a win. Offers appear after a jam or in the shop, never as interruptions.</p></div>
+        </div>
+      </section>
+
+      <section class="step" data-title="Measure">
+        <header><span class="n">07</span><h2>Metrics and experiment</h2></header>
+        <div class="tablecard">
+          <table>
+            <thead><tr><th>Level</th><th>Metric</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">North Star</th><td>Revenue per daily active player (ARPDAU), purchases plus ads</td></tr>
+              <tr><th scope="row">Primary</th><td>First-purchase conversion in the target segment</td></tr>
+              <tr><th scope="row">Secondary</th><td>Offer view-to-purchase rate; Ad-Light Pass uptake; second purchase within 30 days</td></tr>
+              <tr><th scope="row">Guardrails</th><td>Day-1 and Day-7 retention; ad revenue per non-payer; store rating; session length</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <span class="k">A/B test plan</span>
+          <dl class="facts">
+            <dt>Hypothesis</dt><dd>Offering a small, well-timed pack to heavy rewarded-ad watchers will raise first-purchase conversion without hurting retention.</dd>
+            <dt>Groups</dt><dd>50% control (today's experience) vs 50% bridge + Ad-Light Pass, within the target segment</dd>
+            <dt>Success</dt><dd>Higher first-purchase conversion and ARPDAU</dd>
+            <dt>Stop rule</dt><dd>Day-7 retention falls by more than 1 percentage point</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="step" data-title="Risks">
+        <header><span class="n">08</span><h2>Risks and mitigations</h2></header>
+        <div class="risks">
+          <div class="risk"><p><span>Risk</span>The pass cannibalises ad revenue from players who would never pay.</p><p><span>Mitigation</span>Show it only to the target segment, and track ad revenue per non-payer.</p></div>
+          <div class="risk"><p><span>Risk</span>A cheap first pack anchors players to low prices.</p><p><span>Mitigation</span>Make it a one-time offer, then ladder up prices.</p></div>
+          <div class="risk"><p><span>Risk</span>Offers at the jam feel pay-to-win.</p><p><span>Mitigation</span>Always show a free rewarded-ad option next to the paid one.</p></div>
+        </div>
+      </section>
+
+      <section class="step" data-title="Sources">
+        <header><span class="n">09</span><h2>Sources</h2></header>
+        <div class="sources">
+          <a href="https://www.appgoblin.info/apps/com.microdose.balljam" target="_blank" rel="noopener">AppGoblin: Marble Sort! – Color Puzzle (Android stats, estimates)</a>
+          <a href="https://apps.apple.com/au/app/id6754558455" target="_blank" rel="noopener">App Store: Marble Sort! – Color Puzzle (in-app purchases, reviews)</a>
+          <a href="https://nextbiggames.com/2026/03/28/marble-sort-by-voodoo-conveyor-puzzle-scaling" target="_blank" rel="noopener">Next Big Games: Marble Sort by Voodoo, conveyor puzzle scaling fast (Mar 2026)</a>
+          <a href="https://gamedevreports.substack.com/p/sensor-tower-mobile-game-ad-monetization" target="_blank" rel="noopener">Sensor Tower via Game Dev Reports: mobile game ad monetisation in 2026</a>
+          <a href="https://gamegrowthadvisor.com/blog/2026-06-02-hybrid-monetization-mobile-games-iap-ads-guide-2026/" target="_blank" rel="noopener">Game Growth Advisor: hybrid monetisation guide 2026</a>
+        </div>
+      </section>
+    </div>
+  </div>
+  <nav class="pager" aria-label="Case studies"><a href="#instamart"><span>Previous</span><b>Swiggy Instamart</b></a><a class="r" href="#upi"><span>Next</span><b>Pause Before You Pay</b></a></nav>
+</article>
+
+<!-- ========== UPI ========== -->
+<article class="view case" data-view="upi" data-c="upi" hidden>
+  <a class="back" href="#work">← Back to work</a>
+  <div class="chero">
+    <div class="txt">
+      <div class="co"><span class="logo">₹</span>UPI payments app · Concept study · FinTech</div>
+      <h1>Pause before you pay: stopping UPI scams at the last step</h1>
+      <p class="thesis">Since October 2025, UPI no longer allows person-to-person collect requests. Scammers adapted: they now persuade victims to send money themselves. PINs and device checks can't stop a payment the user genuinely wants to make, so the app has to help at the moment of decision.</p>
+    </div>
+    <div class="art pad" style="display:grid;place-items:center"><div class="phone" aria-hidden="true"><div class="screen pay"><div class="payhead"><div class="sbar" style="padding:0 0 4px"><span>9:41</span><span>●●●</span></div><div class="payee"><span class="av">?</span><div><b>Unknown UPI ID</b><br><span style="opacity:.8">helpdesk.verify@xyz</span></div></div><span class="amt">₹18,500</span></div><div class="warn"><h5>⚠ Pause and check</h5><div class="flags"><span>First payment to this UPI ID</span><span>Much higher than your usual payments</span><span>Reported by 3 other users</span></div><p style="margin:0;font-weight:600">Why are you paying?</p><div class="chipset"><span>Friend or family</span><span>Shop or bill</span><span>Investment or trading</span><span class="sel">Someone on a call asked me</span><span>Police or govt. fine</span></div><div class="mbtn ok"><span>Continue</span><span>→</span></div></div></div></div></div>
+  </div>
+  <div class="summary">
+    <div class="card"><span class="lab">Problem</span><p>Indians lost at least ₹22,495 crore to cyber fraud in 2025, and complaints rose 24%.</p></div>
+    <div class="card"><span class="lab">Solution</span><p>A risk-based "pause and check" for risky payments, plus one-tap scam reporting after payment.</p></div>
+    <div class="card"><span class="lab">Measure</span><p>Scam losses prevented, with everyday payment success as the guardrail.</p></div>
+  </div>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Contents"></nav>
+    <div class="steps">
+
+      <section class="step" data-title="Context">
+        <header><span class="n">01</span><h2>Context: how UPI scams changed</h2></header>
+        <div class="g4">
+          <div class="card"><span class="k">Lost to cyber fraud, 2025</span><span class="stat tnum">₹22,495 cr</span></div>
+          <div class="card"><span class="k">Complaints, 2025</span><span class="stat tnum">28.15 lakh</span><p class="small">Up 24% from 2024</p></div>
+          <div class="card"><span class="k">Share of losses: investment scams</span><span class="stat tnum">75–76%</span></div>
+          <div class="card"><span class="k">UPI victims who never reported</span><span class="stat tnum">51%</span><p class="small">LocalCircles survey</p></div>
+        </div>
+        <ul class="list">
+          <li><b>Collect requests removed:</b> NPCI stopped P2P collect requests from 1 October 2025, closing a major scam route. Every P2P payment is now started by the payer.</li>
+          <li><b>Scams moved to persuasion:</b> investment scams cause about three-quarters of losses, and "digital arrest" scams another 9%. In both, the victim sends the money themselves.</li>
+          <li><b>Speed cuts both ways:</b> UPI moves money in seconds, but prompt reporting can still freeze funds. The government's reporting system saved ₹7,130 crore this way.</li>
+        </ul>
+      </section>
+
+      <section class="step" data-title="Users">
+        <header><span class="n">02</span><h2>Who gets scammed, and how</h2></header>
+        <div class="g2">
+          <div class="card">
+            <span class="k">Persona (illustrative)</span>
+            <h3>Ramesh, 63 · Retired teacher, Lucknow</h3>
+            <p class="q">"The officer said my Aadhaar was linked to a crime and I had to transfer money to 'verify' my account. He stayed on the call the whole time."</p>
+            <dl class="facts"><dt>Uses UPI for</dt><dd>Bills, groceries, sending money to family</dd><dt>Scam type</dt><dd>Digital arrest: authority, fear, urgency</dd><dt>Gap</dt><dd>Nothing in the app tells him that police never collect money over UPI</dd></dl>
+          </div>
+          <div class="card">
+            <span class="k">Persona (illustrative)</span>
+            <h3>Neha, 27 · Marketing executive, Pune</h3>
+            <p class="q">"The trading group showed my profits growing. To withdraw, they said I had to pay a 'tax' to a new UPI ID."</p>
+            <dl class="facts"><dt>Uses UPI for</dt><dd>Everything, several times a day</dd><dt>Scam type</dt><dd>Investment scam: greed, social proof</dd><dt>Gap</dt><dd>First payment to an unknown ID looks identical to paying a friend</dd></dl>
+          </div>
+        </div>
+        <div class="tablecard">
+          <table>
+            <thead><tr><th>Scam step</th><th>What the victim does</th><th>What the app sees</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">1. Hook</th><td>Gets a call, SMS or group invite</td><td>Nothing</td></tr>
+              <tr><th scope="row">2. Pressure</th><td>Is told to act fast and keep it secret</td><td>Nothing</td></tr>
+              <tr class="hot"><th scope="row">3. Payment</th><td>Pays a new UPI ID, often while on a call</td><td>New payee, unusual amount, active call, payee reported by others</td></tr>
+              <tr class="hot"><th scope="row">4. Realisation</th><td>Hours or days later; half never report it</td><td>Nothing, unless reporting is easy</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="insight"><span class="lab">Key insight</span><p>The payment screen is the only step the app controls, and it already holds strong risk signals. Generic warnings are ignored because they appear on every payment. A warning shown only on risky payments, and tailored to the user's own reason for paying, can break the scammer's spell.</p></div>
+      </section>
+
+      <section class="step" data-title="Define">
+        <header><span class="n">03</span><h2>Define</h2></header>
+        <p class="problem">How might we stop users from sending money to scammers, without adding friction to the everyday payments that make UPI great?</p>
+        <ul class="list">
+          <li><b>Constraint:</b> the vast majority of payments are genuine, so any check must be targeted.</li>
+          <li><b>Constraint:</b> the user, not a fraudster, is the one tapping "Pay". Blocking alone won't work; the user must be convinced.</li>
+        </ul>
+      </section>
+
+      <section class="step" data-title="Prioritise">
+        <header><span class="n">04</span><h2>Ideas, prioritised with RICE</h2></header>
+        <div class="tablecard rice">
+          <table>
+            <thead><tr><th>Idea</th><th class="num">Reach</th><th class="num">Impact</th><th class="num">Confidence</th><th class="num">Effort</th><th class="num">Score</th></tr></thead>
+            <tbody>
+              <tr class="pick"><td><b>Pause and check:</b> for risky payments, ask why the user is paying, then show a tailored warning</td><td class="num">9</td><td class="num">3</td><td class="num">70%</td><td class="num">2</td><td class="num"><b>9.5</b></td></tr>
+              <tr class="pick"><td><b>One-tap report:</b> report a scam to the bank and 1930 straight from the payment receipt</td><td class="num">6</td><td class="num">2</td><td class="num">70%</td><td class="num">1</td><td class="num"><b>8.4</b></td></tr>
+              <tr><td><b>Scam tips</b> on the app home screen</td><td class="num">10</td><td class="num">0.5</td><td class="num">40%</td><td class="num">0.5</td><td class="num">4.0</td></tr>
+              <tr><td><b>Family Guard:</b> a trusted contact approves high-value payments (opt-in)</td><td class="num">3</td><td class="num">3</td><td class="num">60%</td><td class="num">2</td><td class="num">2.7</td></tr>
+              <tr><td><b>On-call detection</b> with a cooling-off timer</td><td class="num">5</td><td class="num">3</td><td class="num">50%</td><td class="num">3</td><td class="num">2.5</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small">Reach = share of users affected (1–10). Impact = 0.5–3. Effort = person-months. Scores are illustrative estimates.</p>
+        <p><b>MVP:</b> pause and check plus one-tap reporting. Family Guard and on-call detection follow in phase 2, once the risk model is proven.</p>
+      </section>
+
+      <section class="step" data-title="Design">
+        <header><span class="n">05</span><h2>Design: concept screens</h2></header>
+        <div class="mocks">
+          <figure class="mockwrap"><div class="phone" aria-hidden="true"><div class="screen pay"><div class="payhead"><div class="sbar" style="padding:0 0 4px"><span>9:41</span><span>●●●</span></div><div class="payee"><span class="av">?</span><div><b>Unknown UPI ID</b><br><span style="opacity:.8">helpdesk.verify@xyz</span></div></div><span class="amt">₹18,500</span></div><div class="warn"><h5>⚠ Pause and check</h5><div class="flags"><span>First payment to this UPI ID</span><span>Much higher than your usual payments</span><span>Reported by 3 other users</span></div><p style="margin:0;font-weight:600">Why are you paying?</p><div class="chipset"><span>Friend or family</span><span>Shop or bill</span><span>Investment or trading</span><span class="sel">Someone on a call asked me</span><span>Police or govt. fine</span></div><div class="mbtn ok"><span>Continue</span><span>→</span></div></div></div></div><figcaption><b>1. Pause and check</b>Shown only when risk signals fire. The user picks a reason.</figcaption></figure>
+          <figure class="mockwrap"><div class="phone" aria-hidden="true"><div class="screen pay"><div class="payhead"><div class="sbar" style="padding:0 0 4px"><span>9:41</span><span>●●●</span></div><div class="payee"><span class="av">?</span><div><b>Unknown UPI ID</b><br><span style="opacity:.8">helpdesk.verify@xyz</span></div></div><span class="amt">₹18,500</span></div><div class="warn"><h5>⚠ This looks like a scam</h5><div class="alertbox"><b>Police, CBI and banks never ask you to pay over UPI.</b> Scammers stay on the call and tell you to ignore this warning.</div><div class="mbtn danger"><span>Cancel payment</span><span>✕</span></div><div class="mbtn ad" style="background:#E3F2EF;color:#1E5F55"><span>Ask Riya (family) to approve</span><span>→</span></div><div class="mbtn ghost">Pay after 30 min wait</div></div></div></div><figcaption><b>2. Tailored warning</b>The reason "asked on a call" triggers the strongest warning and a wait.</figcaption></figure>
+          <figure class="mockwrap"><div class="phone" aria-hidden="true"><div class="screen pay"><div class="payhead"><div class="sbar" style="padding:0 0 4px"><span>9:41</span><span>●●●</span></div><div class="payee"><span class="av">?</span><div><b>Unknown UPI ID</b><br><span style="opacity:.8">helpdesk.verify@xyz</span></div></div><span class="amt">Paid</span></div><div class="warn" style="border-color:#D7DCE0"><h5 style="color:#1E8576">✓ Paid ₹18,500</h5><p style="margin:0;color:#555">To helpdesk.verify@xyz · just now</p><div class="mbtn danger"><span>I was scammed: report now</span><span>→</span></div><div class="alertbox">Reporting within the first hour gives the best chance to freeze the money. We'll alert your bank and the 1930 cyber helpline.</div><div class="mbtn ghost">Download receipt</div></div></div></div><figcaption><b>3. One-tap report</b>From the receipt, so funds can be frozen fast.</figcaption></figure>
+        </div>
+        <p class="small">Concept mock-ups for a generic UPI app.</p>
+        <div class="card">
+          <span class="k">When does the check appear?</span>
+          <ul class="list">
+            <li>First payment to this UPI ID, and the amount is unusual for this user</li>
+            <li>The payee has been reported by other users or appears in suspect registries</li>
+            <li>The payee is a new account receiving many first-time payments (a mule pattern)</li>
+            <li>The user is on an active phone call while paying (phase 2, on-device, with consent)</li>
+          </ul>
+          <p class="small">Verified merchant QR codes are exempt, so shop payments stay instant.</p>
+        </div>
+      </section>
+
+      <section class="step" data-title="Measure">
+        <header><span class="n">06</span><h2>Metrics and experiment</h2></header>
+        <div class="tablecard">
+          <table>
+            <thead><tr><th>Level</th><th>Metric</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">North Star</th><td>Confirmed scam losses per ₹1 crore sent (lower is better)</td></tr>
+              <tr><th scope="row">Primary</th><td>Share of flagged payments cancelled that were later confirmed as scams</td></tr>
+              <tr><th scope="row">Secondary</th><td>Scams reported within 1 hour of payment; amount frozen after reports</td></tr>
+              <tr><th scope="row">Guardrails</th><td>Payment success rate for unflagged payments; genuine payments wrongly flagged; median time to pay; app rating</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <span class="k">A/B test plan</span>
+          <dl class="facts">
+            <dt>Hypothesis</dt><dd>A tailored check on risky payments will cut confirmed scam losses without lowering success of everyday payments.</dd>
+            <dt>Groups</dt><dd>Within flagged payments: 50% see the check, 50% see today's flow (a small, monitored holdout)</dd>
+            <dt>Success</dt><dd>Lower confirmed scam losses in the test group</dd>
+            <dt>Stop rule</dt><dd>Success of unflagged payments drops, or too many genuine payments are flagged</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="step" data-title="Risks">
+        <header><span class="n">07</span><h2>Risks and mitigations</h2></header>
+        <div class="risks">
+          <div class="risk"><p><span>Risk</span>Scammers coach victims: "You'll see a warning, just ignore it."</p><p><span>Mitigation</span>The check asks the user's reason, and names this tactic in the warning itself.</p></div>
+          <div class="risk"><p><span>Risk</span>Alert fatigue from too many checks.</p><p><span>Mitigation</span>Strict risk thresholds, merchant QR exemption, and a cap on checks per user.</p></div>
+          <div class="risk"><p><span>Risk</span>Privacy concerns about call detection.</p><p><span>Mitigation</span>On-device only, opt-in, and only a yes/no "on call" signal.</p></div>
+          <div class="risk"><p><span>Risk</span>Genuine urgent payments get delayed.</p><p><span>Mitigation</span>The wait applies only to the highest-risk tier, with Family Guard as a way to approve instantly.</p></div>
+        </div>
+      </section>
+
+      <section class="step" data-title="Sources">
+        <header><span class="n">08</span><h2>Sources</h2></header>
+        <div class="sources">
+          <a href="https://theprint.in/india/cybercrime-saw-24-spike-in-2025-indians-lost-rs-22495-crore-mainly-in-investment-scams/2859930/" target="_blank" rel="noopener">ThePrint: cybercrime saw a 24% spike in 2025; Indians lost ₹22,495 crore (MHA data)</a>
+          <a href="https://www.outlookmoney.com/banking/npci-to-end-upi-p2p-collect-requests-from-october-1-to-reduce-fraud" target="_blank" rel="noopener">Outlook Money: NPCI ends UPI P2P collect requests from 1 October 2025</a>
+          <a href="https://www.business-standard.com/finance/news/upi-transaction-fraud-india-survey-one-in-five-users-hit-localcircles-125062601141_1.html" target="_blank" rel="noopener">Business Standard: LocalCircles survey on UPI fraud (Jun 2025)</a>
+          <a href="https://www.businesstoday.in/personal-finance/news/story/upi-fraud-is-surging-heres-how-fintechs-and-regulators-are-fighting-back-522822-2026-03-28" target="_blank" rel="noopener">Business Today: UPI fraud is surging (Mar 2026)</a>
+        </div>
+      </section>
+    </div>
+  </div>
+  <nav class="pager" aria-label="Case studies"><a href="#marblesort"><span>Previous</span><b>Marble Sort</b></a><a class="r" href="#fico"><span>Next</span><b>FICO DMPS</b></a></nav>
+</article>
+
+<section class="contact" id="contact-area">
+  <h2>Thanks for exploring my portfolio!</h2>
+  <p>Open to Associate Product Manager and Product Manager 1 roles across consumer, B2B, gaming and AI products.</p>
+  <div class="row">
+    <a class="pill-btn" href="https://www.linkedin.com/in/kritika-girdhar-98079a16b" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <button class="ghost-btn" id="copy" type="button"><span class="email" id="email">kritikagirdhar4@gmail.com</span> · Copy</button>
+  </div>
+  <span class="toast" id="toast" role="status" aria-live="polite"></span>
+  <p class="note">Rapido and Swiggy Instamart are independent concept studies, not commissioned by either company. Personas are illustrative.</p>
+</section>
+<p class="copyright">© 2026 Kritika Girdhar</p>
+
+</div>
+</main>
+
+<script>
+(function(){
+  var views={work:'home',about:'about',rapido:'rapido',instamart:'instamart',fico:'fico',marblesort:'marblesort',upi:'upi'};
+  var navOf={home:'work',about:'about',rapido:'work',instamart:'work',fico:'work',marblesort:'work',upi:'work'};
+  document.querySelectorAll('.case').forEach(function(c){
+    var toc=c.querySelector('.toc'), steps=c.querySelectorAll('.step');
+    steps.forEach(function(s){
+      var b=document.createElement('button'); b.type='button'; b.textContent=s.dataset.title;
+      b.addEventListener('click',function(){s.scrollIntoView({block:'start'});});
+      toc.appendChild(b); s._b=b;
+    });
+    if(steps[0]) steps[0]._b.classList.add('on');
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){
+        if(e.isIntersecting){steps.forEach(function(x){x._b.classList.remove('on')});e.target._b.classList.add('on');
+          if(e.target._b.scrollIntoView && toc.scrollWidth>toc.clientWidth){toc.scrollLeft=e.target._b.offsetLeft-16;}}
+      });},{rootMargin:'-30% 0px -60% 0px'});
+      steps.forEach(function(s){io.observe(s)});
+    }
+  });
+  document.getElementById('seeWork').addEventListener('click',function(e){e.preventDefault();document.getElementById('selected').scrollIntoView({block:'start'});});
+  function show(){
+    var h=(location.hash||'').slice(1);
+    if(h==='contact'){document.getElementById('contact-area').scrollIntoView({block:'start'});return;}
+    var v=views[h]||'home';
+    document.querySelectorAll('.view').forEach(function(el){el.hidden=el.dataset.view!==v;});
+    document.querySelectorAll('[data-nav]').forEach(function(a){
+      if(a.dataset.nav===navOf[v]) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+    });
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',show); show();
+  var btn=document.getElementById('copy'),toast=document.getElementById('toast'),email=document.getElementById('email');
+  function sel(){var r=document.createRange();r.selectNodeContents(email);var s=getSelection();s.removeAllRanges();s.addRange(r);toast.textContent='Selected. Press Ctrl+C to copy';}
+  btn.addEventListener('click',function(){
+    try{navigator.clipboard.writeText(email.textContent.trim()).then(function(){toast.textContent='Email copied';},sel);}catch(e){sel();}
+    setTimeout(function(){toast.textContent='';},2500);
+  });
+})();
+</script>
+
+</body>
+</html>
